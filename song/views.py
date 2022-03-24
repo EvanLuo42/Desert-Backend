@@ -1,3 +1,4 @@
+from django.contrib.auth import get_user_model
 from django.http import JsonResponse, StreamingHttpResponse
 from django.views.decorators.csrf import csrf_exempt
 
@@ -6,6 +7,7 @@ from song.forms import UploadScoreForm, GetSongInfoForm
 
 SongRecord = models.SongRecord
 SongInfo = models.SongInfo
+User = get_user_model()
 
 
 def songs_dump(songs):
@@ -15,6 +17,7 @@ def songs_dump(songs):
         'song_author': song.song_author,
         'score_author': song.score_author,
         'difficulty': song.difficulty,
+        'best_score': song.best_score,
         'level': song.level,
     } for song in songs]
 
@@ -26,6 +29,7 @@ def song_dump(song):
         'song_author': song.song_author,
         'score_author': song.score_author,
         'difficulty': song.difficulty,
+        'best_score': song.best_score,
         'level': song.level,
     }
 
@@ -38,8 +42,20 @@ def upload_score_view(request):
             user_id = request.session.get('user_id')
             song_id = form.clean_song_id()
             score = form.cleaned_data.get('score')
-            song_record = SongRecord.objects.create(user_id=user_id, song_id=song_id, score=score)
-            song_record.save()
+            rank_point = form.cleaned_data.get('rank_point')
+
+            if SongRecord.objects.filter(user_id=user_id, song_id=song_id).exists():
+                if SongRecord.objects.get(user_id=user_id, song_id=song_id).best_score < score:
+                    song_record = SongRecord.objects.update(user_id=user_id, song_id=song_id, score=score,
+                                                            best_score=score)
+                    song_record.save()
+                else:
+                    SongRecord.objects.update(user_id=user_id, song_id=song_id, score=score)
+            else:
+                SongRecord.objects.create(user_id=user_id, song_id=song_id, score=score,
+                                          best_score=score)
+
+            User.objects.filter(user_id=user_id).update(rank_point=rank_point)
 
             return JsonResponse({'status': 'success', 'message': 'Score uploaded successfully'})
         else:

@@ -54,6 +54,9 @@ class RegisterForm(Form):
 class AddFriendForm(Form):
     friend_id = fields.IntegerField(
         required=True,
+        error_messages={
+            'required': 'Friend ID can not be empty.'
+        }
     )
 
     def clean_friend_id(self):
@@ -63,4 +66,18 @@ class AddFriendForm(Form):
         else:
             raise fields.ValidationError('User does not exist.')
 
-    # TODO Email validation
+
+class GetPlayerForm(Form):
+    user_id = fields.IntegerField(
+        required=True,
+        error_messages={
+            'required': 'User ID can not be empty.'
+        }
+    )
+
+    def clean_user_id(self):
+        user_id = self.cleaned_data.get('user_id')
+        if User.objects.filter(user_id=user_id).exists():
+            return self.cleaned_data.get('user_id')
+        else:
+            return fields.ValidationError('User does not exist.')

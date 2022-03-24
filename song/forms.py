@@ -20,6 +20,13 @@ class UploadScoreForm(Form):
         }
     )
 
+    rank_point = fields.IntegerField(
+        required=True,
+        error_messages={
+            'required': 'Rank point can not be null.'
+        }
+    )
+
     def clean_song_id(self):
         if SongInfo.objects.filter(song_id=self.cleaned_data.get('song_id')).exists():
             return self.cleaned_data.get('song_id')

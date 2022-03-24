@@ -2,7 +2,7 @@ from django.contrib.auth import get_user_model, authenticate, login
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 
-from player.forms import LoginForm, RegisterForm, AddFriendForm
+from player.forms import LoginForm, RegisterForm, AddFriendForm, GetPlayerForm
 from player.models import Friend
 
 User = get_user_model()
@@ -12,7 +12,9 @@ def users_dump(users):
     return [{
         'user_id': user.user_id,
         'user_name': user.user_name,
-        'ptt': user.ptt,
+        'rank_point': user.rank_point,
+        'grade': user.grade,
+        'selected_role': user.selected_role,
         'last_login': str(user.last_login),
     } for user in users]
 
@@ -21,7 +23,9 @@ def user_dump(user):
     return {
         'user_id': user.user_id,
         'user_name': user.user_name,
-        'ptt': user.ptt,
+        'rank_point': user.rank_point,
+        'grade': user.grade,
+        'selected_role': user.selected_role,
         'last_login': str(user.last_login),
     }
 
@@ -119,3 +123,21 @@ def delete_friend_view(request):
             return JsonResponse({'status': 'error', 'message': 'Invalid Form'})
     else:
         return JsonResponse({'status': 'error', 'message': 'Invalid Request'})
+
+
+@csrf_exempt
+def get_all_players_view(request):
+    if request.method == 'GET':
+        return JsonResponse({'status': 'success', 'players': users_dump(User.objects.all())})
+    else:
+        return JsonResponse({'status': 'error', 'message': 'Invalid Request'})
+
+
+@csrf_exempt
+def get_player_view(request):
+    if request.method == 'GET':
+        form = GetPlayerForm(request.GET)
+        if form.is_valid():
+            user_id = form.clean_user_id()
+            user = User.objects.get(user_id=user_id)
+            return JsonResponse({'status': 'success', 'player': user_dump(user)})

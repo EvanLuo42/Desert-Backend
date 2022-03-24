@@ -29,7 +29,9 @@ class Player(AbstractBaseUser, PermissionsMixin):
     user_name = models.CharField(max_length=30, unique=True)
     is_staff = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
-    ptt = models.FloatField(default=0)
+    rank_point = models.FloatField(default=0)
+    grade = models.IntegerField(default=1)
+    selected_role = models.CharField(max_length=30, default='')
 
     USERNAME_FIELD = 'user_name'
     REQUIRED_FIELDS = ['is_staff', 'is_superuser']
