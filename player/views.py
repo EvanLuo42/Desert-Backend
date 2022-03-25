@@ -35,8 +35,8 @@ def login_view(request):
     if request.method == 'POST':
         form = LoginForm(request.POST)
         if form.is_valid():
-            user_name = form.cleaned_data['user_name']
-            password = form.cleaned_data['password']
+            user_name = form.cleaned_data.get('user_name')
+            password = form.cleaned_data.get('password')
             user = authenticate(username=user_name, password=password)
 
             if user:
@@ -48,7 +48,7 @@ def login_view(request):
             else:
                 return JsonResponse({'status': 'error', 'message': 'Invalid Credentials'})
         else:
-            return JsonResponse({'status': 'error', 'message': 'Invalid Form'})
+            return JsonResponse({'status': 'error', 'message': form.errors})
     else:
         return JsonResponse({'status': 'error', 'message': 'Invalid Request'})
 
@@ -58,14 +58,14 @@ def register_view(request):
     if request.method == 'POST':
         form = RegisterForm(request.POST)
         if form.is_valid():
-            user_name = form.cleaned_data['user_name']
-            password = form.cleaned_data['password']
+            user_name = form.cleaned_data.get('user_name')
+            password = form.cleaned_data.get('password')
             user = User.objects.create_user(user_name, password)
             user.save()
 
             return JsonResponse({'status': 'success', 'message': 'Registration Successful'})
         else:
-            return JsonResponse({'status': 'error', 'message': 'Invalid Form'})
+            return JsonResponse({'status': 'error', 'message': form.errors})
     else:
         return JsonResponse({'status': 'error', 'message': 'Invalid Request'})
 
@@ -87,7 +87,7 @@ def add_friend_view(request):
 
                 return JsonResponse({'status': 'success', 'message': 'Friend Added'})
         else:
-            return JsonResponse({'status': 'error', 'message': 'Invalid Form'})
+            return JsonResponse({'status': 'error', 'message': form.errors})
     else:
         return JsonResponse({'status': 'error', 'message': 'Invalid Request'})
 
@@ -111,16 +111,17 @@ def get_friends_view(request):
 def delete_friend_view(request):
     if request.method == 'GET':
         form = AddFriendForm(request.GET)
-        if form.is_valid() and request.user.is_authenticated or request.user.is_superuser:
-            user_id = request.session.get('user_id')
-            friend_id = form.clean_friend_id()
-            if Friend.objects.filter(friend_id=friend_id, user_id=user_id).exists():
-                Friend.objects.filter(friend_id=friend_id, user_id=user_id).delete()
-                return JsonResponse({'status': 'success', 'message': 'Friend Deleted'})
-            else:
-                return JsonResponse({'status': 'error', 'message': 'You have not added the friend yet'})
+        if form.is_valid():
+            if request.user.is_authenticated or request.user.is_superuser:
+                user_id = request.session.get('user_id')
+                friend_id = form.clean_friend_id()
+                if Friend.objects.filter(friend_id=friend_id, user_id=user_id).exists():
+                    Friend.objects.filter(friend_id=friend_id, user_id=user_id).delete()
+                    return JsonResponse({'status': 'success', 'message': 'Friend Deleted'})
+                else:
+                    return JsonResponse({'status': 'error', 'message': 'You have not added the friend yet'})
         else:
-            return JsonResponse({'status': 'error', 'message': 'Invalid Form'})
+            return JsonResponse({'status': 'error', 'message': form.errors})
     else:
         return JsonResponse({'status': 'error', 'message': 'Invalid Request'})
 
@@ -141,3 +142,7 @@ def get_player_view(request):
             user_id = form.clean_user_id()
             user = User.objects.get(user_id=user_id)
             return JsonResponse({'status': 'success', 'player': user_dump(user)})
+        else:
+            return JsonResponse({'status': 'error', 'message': form.errors})
+    else:
+        return JsonResponse({'status': 'error', 'message': 'Invalid Request'})

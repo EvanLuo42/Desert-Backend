@@ -45,7 +45,7 @@ class RegisterForm(Form):
 
     def clean_user_name(self):
         user_name = self.cleaned_data.get('user_name')
-        if User.objects.get(user_name=user_name).exist():
+        if User.objects.filter(user_name=user_name).exists():
             raise fields.ValidationError('User is already exist.')
         else:
             return user_name
@@ -80,4 +80,4 @@ class GetPlayerForm(Form):
         if User.objects.filter(user_id=user_id).exists():
             return self.cleaned_data.get('user_id')
         else:
-            return fields.ValidationError('User does not exist.')
+            raise fields.ValidationError('User does not exist.')
