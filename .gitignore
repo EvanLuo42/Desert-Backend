@@ -1,5 +1,5 @@
 __pycache__
 .DS_Store
 desert.sqlite
-song.migrations
-player.migrations
+song/migrations
+player/migrations
