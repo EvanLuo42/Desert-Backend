@@ -43,7 +43,7 @@ class UploadScoreForm(Form):
         score = self.cleaned_data.get('score')
         song_id = self.cleaned_data.get('song_id')
 
-        if check_password_hash(magic, rank_point + score + song_id):
+        if (math.log(score, rank_point) ** song_id) % rank_point == magic:
             return magic
         else:
             raise fields.ValidationError('Magic is not correct.')
