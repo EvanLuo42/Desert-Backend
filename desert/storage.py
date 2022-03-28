@@ -28,7 +28,7 @@ class TencentStorage(Storage):
         return filename
 
     def generate_filename(self, filename):
-        return filename + '_' + sha1(str(time.time()).encode('utf-8')).hexdigest()
+        return filename + '_' + str(time.time()).encode('utf-8')
 
     def url(self, name):
         file_url = client.get_object_url(bucket, 'song/' + name)
