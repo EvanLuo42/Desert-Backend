@@ -1,6 +1,3 @@
-import time
-from hashlib import sha1
-
 from django.core.files.storage import Storage
 from django.utils.deconstruct import deconstructible
 from qcloud_cos import CosConfig, CosS3Client
@@ -19,19 +16,13 @@ host = 'https://' + bucket + '.cos.' + region + '.myqcloud.com/'
 @deconstructible
 class TencentStorage(Storage):
     def save(self, name, content, max_length=None):
-        filename = self.generate_filename(name)
         client.put_object(
             Bucket=bucket,
-            Key='song/' + filename,
+            Key='song/' + name,
             Body=content.read()
         )
-        return filename
-
-    def generate_filename(self, filename):
-        return str(time.time()).encode('utf-8') + filename
+        return name
 
     def url(self, name):
         file_url = client.get_object_url(bucket, 'song/' + name)
         return str(file_url)
-
-
