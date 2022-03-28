@@ -7,6 +7,7 @@ import song.views
 urlpatterns = [
     path('login/', player.views.login_view),
     path('register/', player.views.register_view),
+    path('logout/', player.views.logout_view),
     path('add_friend/', player.views.add_friend_view),
     path('get_friends/', player.views.get_friends_view),
     path('get_all_players/', player.views.get_all_players_view),

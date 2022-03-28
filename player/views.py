@@ -1,4 +1,4 @@
-from django.contrib.auth import get_user_model, authenticate, login
+from django.contrib.auth import get_user_model, authenticate, login, logout
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 
@@ -71,21 +71,36 @@ def register_view(request):
 
 
 @csrf_exempt
+def logout_view(request):
+    if request.method == 'GET':
+        if request.user.is_authenticated:
+            logout(request)
+            return JsonResponse({'status': 'success', 'message': 'Logout Successful'})
+        else:
+            return JsonResponse({'status': 'error', 'message': 'You have not logged in yet'})
+    else:
+        return JsonResponse({'status': 'error', 'message': 'Invalid Request'})
+
+
+@csrf_exempt
 def add_friend_view(request):
     if request.method == 'GET':
         form = AddFriendForm(request.GET)
-        if form.is_valid() and request.user.is_authenticated:
-            friend_id = form.clean_friend_id()
-            user_id = request.session.get('user_id')
-            if friend_id == user_id:
-                return JsonResponse({'status': 'error', 'message': 'You can not add yourself as friend'})
-            elif [friend.user_id == user_id for friend in Friend.objects.filter(friend_id=friend_id)]:
-                return JsonResponse({'status': 'error', 'message': 'You have added the friend already'})
-            else:
-                friend = Friend.objects.create(user_id=user_id, friend_id=friend_id)
-                friend.save()
+        if form.is_valid():
+            if request.user.is_authenticated:
+                friend_id = form.clean_friend_id()
+                user_id = request.session.get('user_id')
+                if friend_id == user_id:
+                    return JsonResponse({'status': 'error', 'message': 'You can not add yourself as friend'})
+                elif [friend.user_id == user_id for friend in Friend.objects.filter(friend_id=friend_id)]:
+                    return JsonResponse({'status': 'error', 'message': 'You have added the friend already'})
+                else:
+                    friend = Friend.objects.create(user_id=user_id, friend_id=friend_id)
+                    friend.save()
 
-                return JsonResponse({'status': 'success', 'message': 'Friend Added'})
+                    return JsonResponse({'status': 'success', 'message': 'Friend Added'})
+            else:
+                return JsonResponse({'status': 'error', 'message': 'You have not logged in yet'})
         else:
             return JsonResponse({'status': 'error', 'message': form.errors})
     else:
@@ -120,6 +135,8 @@ def delete_friend_view(request):
                     return JsonResponse({'status': 'success', 'message': 'Friend Deleted'})
                 else:
                     return JsonResponse({'status': 'error', 'message': 'You have not added the friend yet'})
+            else:
+                return JsonResponse({'status': 'error', 'message': 'You have not logged in yet'})
         else:
             return JsonResponse({'status': 'error', 'message': form.errors})
     else:

@@ -119,3 +119,8 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'player.Player'
+
+COS_SECRET_ID = 'AKIDjIbdPu86oFQKxJOCizyg7IDsHPIuEH5b'
+COS_SECRET_KEY = 'HH1TeYBYfvvgANJyMTJsBDySgdJjupTp'
+BUCKET = 'desert-1258493860'
+REGION = 'ap-shanghai'

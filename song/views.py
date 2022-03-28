@@ -1,5 +1,6 @@
 from django.contrib.auth import get_user_model
 from django.http import JsonResponse, StreamingHttpResponse
+from django.shortcuts import redirect
 from django.views.decorators.csrf import csrf_exempt
 
 from song import models
@@ -113,11 +114,8 @@ def download_song_file_view(request):
         form = GetSongInfoForm(request.GET)
         if form.is_valid():
             song_id = form.clean_song_id()
-            song_file = SongInfo.objects.filter(song_id=song_id).first().song_file.file
-            response = StreamingHttpResponse(song_file)
-            response['Content-Type'] = 'application/octet-stream'
-            response['Content-Disposition'] = 'attachment;filename="{0}"'.format(song_file.name)
-            return response
+            song_url = SongInfo.objects.filter(song_id=song_id).first().song_file.url
+            return redirect(song_url)
         else:
             return JsonResponse({'status': 'error', 'message': form.errors})
     else:
