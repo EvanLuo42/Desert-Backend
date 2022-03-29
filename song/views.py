@@ -1,5 +1,5 @@
 from django.contrib.auth import get_user_model
-from django.http import JsonResponse, StreamingHttpResponse
+from django.http import JsonResponse
 from django.shortcuts import redirect
 from django.views.decorators.csrf import csrf_exempt
 
@@ -66,9 +66,8 @@ def upload_score_view(request):
 
                 if SongRecord.objects.filter(user_id=user_id, song_id=song_id).exists():
                     if SongRecord.objects.get(user_id=user_id, song_id=song_id).best_score < score:
-                        song_record = SongRecord.objects.update(user_id=user_id, song_id=song_id, score=score,
-                                                                best_score=score)
-                        song_record.save()
+                        SongRecord.objects.update(user_id=user_id, song_id=song_id, score=score,
+                                                  best_score=score)
                     else:
                         SongRecord.objects.update(user_id=user_id, song_id=song_id, score=score)
                 else:
@@ -79,11 +78,11 @@ def upload_score_view(request):
 
                 return JsonResponse({'status': 'success', 'message': 'Score uploaded successfully'})
             else:
-                return JsonResponse({'status': 'error', 'message': 'You have to login first'})
+                return JsonResponse({'status': 'error', 'message': 'You have to login first'}, status=401)
         else:
-            return JsonResponse({'status': 'error', 'message': form.errors})
+            return JsonResponse({'status': 'error', 'message': form.errors}, status=400)
     else:
-        return JsonResponse({'status': 'error', 'message': 'Invalid request'})
+        return JsonResponse({'status': 'error', 'message': 'Invalid request'}, status=405)
 
 
 @csrf_exempt
@@ -92,7 +91,7 @@ def get_all_songs_info_view(request):
         songs = SongInfo.objects.all()
         return JsonResponse({'status': 'success', 'songs': songs_dump(songs)})
     else:
-        return JsonResponse({'status': 'error', 'message': 'Invalid request'})
+        return JsonResponse({'status': 'error', 'message': 'Invalid request'}, status=405)
 
 
 @csrf_exempt
@@ -103,9 +102,9 @@ def get_song_info_view(request):
             return JsonResponse({'status': 'success', 'message': song_dump(
                 SongInfo.objects.filter(song_id=form.clean_song_id()).first())})
         else:
-            return JsonResponse({'status': 'error', 'message': form.errors})
+            return JsonResponse({'status': 'error', 'message': form.errors}, status=400)
     else:
-        return JsonResponse({'status': 'error', 'message': 'Invalid request'})
+        return JsonResponse({'status': 'error', 'message': 'Invalid request'}, status=405)
 
 
 @csrf_exempt
@@ -117,9 +116,9 @@ def download_song_file_view(request):
             song_url = SongInfo.objects.filter(song_id=song_id).first().song_file.url
             return redirect(song_url)
         else:
-            return JsonResponse({'status': 'error', 'message': form.errors})
+            return JsonResponse({'status': 'error', 'message': form.errors}, status=400)
     else:
-        return JsonResponse({'status': 'error', 'message': 'Invalid request'})
+        return JsonResponse({'status': 'error', 'message': 'Invalid request'}, status=405)
 
 
 @csrf_exempt
@@ -131,11 +130,11 @@ def get_latest_score_view(request):
                 score = SongRecord.objects.filter(user_id=user_id).order_by('-created_at').first()
                 return JsonResponse({'status': 'success', 'score': score_dump(score)})
             else:
-                return JsonResponse({'status': 'error', 'message': 'No score'})
+                return JsonResponse({'status': 'error', 'message': 'No score'}, status=404)
         else:
-            return JsonResponse({'status': 'error', 'message': 'You have not logged in yet'})
+            return JsonResponse({'status': 'error', 'message': 'You have not logged in yet'}, status=401)
     else:
-        return JsonResponse({'status': 'error', 'message': 'Invalid request'})
+        return JsonResponse({'status': 'error', 'message': 'Invalid request'}, status=405)
 
 
 @csrf_exempt
@@ -147,6 +146,6 @@ def get_top_scores_by_song_id_view(request):
             scores = SongRecord.objects.filter(song_id=song_id).order_by('-score')[:10]
             return JsonResponse({'status': 'success', 'scores': scores_dump(scores)})
         else:
-            return JsonResponse({'status': 'error', 'message': form.errors})
+            return JsonResponse({'status': 'error', 'message': form.errors}, status=400)
     else:
-        return JsonResponse({'status': 'error', 'message': 'Invalid request'})
+        return JsonResponse({'status': 'error', 'message': 'Invalid request'}, status=405)

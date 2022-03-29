@@ -46,11 +46,11 @@ def login_view(request):
 
                 return JsonResponse({'status': 'success', 'message': 'Login Successful'})
             else:
-                return JsonResponse({'status': 'error', 'message': 'Invalid Credentials'})
+                return JsonResponse({'status': 'error', 'message': 'Invalid Credentials'}, status=401)
         else:
-            return JsonResponse({'status': 'error', 'message': form.errors})
+            return JsonResponse({'status': 'error', 'message': form.errors}, status=400)
     else:
-        return JsonResponse({'status': 'error', 'message': 'Invalid Request'})
+        return JsonResponse({'status': 'error', 'message': 'Invalid Request'}, status=405)
 
 
 @csrf_exempt
@@ -65,9 +65,9 @@ def register_view(request):
 
             return JsonResponse({'status': 'success', 'message': 'Registration Successful'})
         else:
-            return JsonResponse({'status': 'error', 'message': form.errors})
+            return JsonResponse({'status': 'error', 'message': form.errors}, status=400)
     else:
-        return JsonResponse({'status': 'error', 'message': 'Invalid Request'})
+        return JsonResponse({'status': 'error', 'message': 'Invalid Request'}, status=405)
 
 
 @csrf_exempt
@@ -77,9 +77,9 @@ def logout_view(request):
             logout(request)
             return JsonResponse({'status': 'success', 'message': 'Logout Successful'})
         else:
-            return JsonResponse({'status': 'error', 'message': 'You have not logged in yet'})
+            return JsonResponse({'status': 'error', 'message': 'You have not logged in yet'}, status=401)
     else:
-        return JsonResponse({'status': 'error', 'message': 'Invalid Request'})
+        return JsonResponse({'status': 'error', 'message': 'Invalid Request'}, status=405)
 
 
 @csrf_exempt
@@ -91,20 +91,21 @@ def add_friend_view(request):
                 friend_id = form.clean_friend_id()
                 user_id = request.session.get('user_id')
                 if friend_id == user_id:
-                    return JsonResponse({'status': 'error', 'message': 'You can not add yourself as friend'})
+                    return JsonResponse({'status': 'error', 'message': 'You can not add yourself as friend'},
+                                        status=400)
                 elif [friend.user_id == user_id for friend in Friend.objects.filter(friend_id=friend_id)]:
-                    return JsonResponse({'status': 'error', 'message': 'You have added the friend already'})
+                    return JsonResponse({'status': 'error', 'message': 'You have added the friend already'}, status=400)
                 else:
                     friend = Friend.objects.create(user_id=user_id, friend_id=friend_id)
                     friend.save()
 
                     return JsonResponse({'status': 'success', 'message': 'Friend Added'})
             else:
-                return JsonResponse({'status': 'error', 'message': 'You have not logged in yet'})
+                return JsonResponse({'status': 'error', 'message': 'You have not logged in yet'}, status=401)
         else:
-            return JsonResponse({'status': 'error', 'message': form.errors})
+            return JsonResponse({'status': 'error', 'message': form.errors}, status=400)
     else:
-        return JsonResponse({'status': 'error', 'message': 'Invalid Request'})
+        return JsonResponse({'status': 'error', 'message': 'Invalid Request'}, status=405)
 
 
 @csrf_exempt
@@ -117,9 +118,9 @@ def get_friends_view(request):
 
             return JsonResponse({'status': 'success', 'friends': users_dump(friends_list)})
         else:
-            return JsonResponse({'status': 'error', 'message': 'You have not logged in yet'})
+            return JsonResponse({'status': 'error', 'message': 'You have not logged in yet'}, status=401)
     else:
-        return JsonResponse({'status': 'error', 'friends': 'Invalid Request'})
+        return JsonResponse({'status': 'error', 'friends': 'Invalid Request'}, status=405)
 
 
 @csrf_exempt
@@ -134,13 +135,13 @@ def delete_friend_view(request):
                     Friend.objects.filter(friend_id=friend_id, user_id=user_id).delete()
                     return JsonResponse({'status': 'success', 'message': 'Friend Deleted'})
                 else:
-                    return JsonResponse({'status': 'error', 'message': 'You have not added the friend yet'})
+                    return JsonResponse({'status': 'error', 'message': 'You have not added the friend yet'}, status=404)
             else:
-                return JsonResponse({'status': 'error', 'message': 'You have not logged in yet'})
+                return JsonResponse({'status': 'error', 'message': 'You have not logged in yet'}, status=401)
         else:
-            return JsonResponse({'status': 'error', 'message': form.errors})
+            return JsonResponse({'status': 'error', 'message': form.errors}, status=400)
     else:
-        return JsonResponse({'status': 'error', 'message': 'Invalid Request'})
+        return JsonResponse({'status': 'error', 'message': 'Invalid Request'}, status=405)
 
 
 @csrf_exempt
@@ -148,7 +149,7 @@ def get_all_players_view(request):
     if request.method == 'GET':
         return JsonResponse({'status': 'success', 'players': users_dump(User.objects.all())})
     else:
-        return JsonResponse({'status': 'error', 'message': 'Invalid Request'})
+        return JsonResponse({'status': 'error', 'message': 'Invalid Request'}, status=405)
 
 
 @csrf_exempt
@@ -160,6 +161,6 @@ def get_player_view(request):
             user = User.objects.get(user_id=user_id)
             return JsonResponse({'status': 'success', 'player': user_dump(user)})
         else:
-            return JsonResponse({'status': 'error', 'message': form.errors})
+            return JsonResponse({'status': 'error', 'message': form.errors}, status=400)
     else:
-        return JsonResponse({'status': 'error', 'message': 'Invalid Request'})
+        return JsonResponse({'status': 'error', 'message': 'Invalid Request'}, status=405)
