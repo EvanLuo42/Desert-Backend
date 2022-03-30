@@ -128,7 +128,7 @@ def delete_friend_view(request):
     if request.method == 'GET':
         form = AddFriendForm(request.GET)
         if form.is_valid():
-            if request.user.is_authenticated or request.user.is_superuser:
+            if request.user.is_authenticated:
                 user_id = request.session.get('user_id')
                 friend_id = form.clean_friend_id()
                 if Friend.objects.filter(friend_id=friend_id, user_id=user_id).exists():

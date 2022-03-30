@@ -30,13 +30,16 @@ class UploadScoreForm(Form):
         }
     )
 
+    '''
     magic = fields.IntegerField(
-        required=False, # True
+        required=False,  # True
         error_messages={
             'required': 'Magic can not be null.'
         }
     )
+    '''
 
+    '''    
     def clean_magic(self):
         magic = self.cleaned_data.get('magic')
         rank_point = self.changed_data.get('rank_point')
@@ -47,6 +50,7 @@ class UploadScoreForm(Form):
             return magic
         else:
             raise fields.ValidationError('Magic is not correct.')
+    '''
 
     def clean_song_id(self):
         if SongInfo.objects.filter(song_id=self.cleaned_data.get('song_id')).exists():

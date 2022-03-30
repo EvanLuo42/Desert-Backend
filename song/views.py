@@ -99,7 +99,7 @@ def get_song_info_view(request):
     if request.method == 'GET':
         form = GetSongInfoForm(request.GET)
         if form.is_valid():
-            return JsonResponse({'status': 'success', 'message': song_dump(
+            return JsonResponse({'status': 'success', 'song': song_dump(
                 SongInfo.objects.filter(song_id=form.clean_song_id()).first())})
         else:
             return JsonResponse({'status': 'error', 'message': form.errors}, status=400)
