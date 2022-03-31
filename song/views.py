@@ -85,7 +85,6 @@ def upload_score_view(request):
         return JsonResponse({'status': 'error', 'message': 'Invalid request'}, status=405)
 
 
-@csrf_exempt
 def get_all_songs_info_view(request):
     if request.method == 'GET':
         songs = SongInfo.objects.all()
@@ -94,7 +93,6 @@ def get_all_songs_info_view(request):
         return JsonResponse({'status': 'error', 'message': 'Invalid request'}, status=405)
 
 
-@csrf_exempt
 def get_song_info_view(request):
     if request.method == 'GET':
         form = GetSongInfoForm(request.GET)
@@ -107,7 +105,6 @@ def get_song_info_view(request):
         return JsonResponse({'status': 'error', 'message': 'Invalid request'}, status=405)
 
 
-@csrf_exempt
 def download_song_file_view(request):
     if request.method == 'GET':
         form = GetSongInfoForm(request.GET)
@@ -121,7 +118,6 @@ def download_song_file_view(request):
         return JsonResponse({'status': 'error', 'message': 'Invalid request'}, status=405)
 
 
-@csrf_exempt
 def get_latest_score_view(request):
     if request.method == 'GET':
         if request.user.is_authenticated:
@@ -137,7 +133,6 @@ def get_latest_score_view(request):
         return JsonResponse({'status': 'error', 'message': 'Invalid request'}, status=405)
 
 
-@csrf_exempt
 def get_top_scores_by_song_id_view(request):
     if request.method == 'GET':
         form = GetSongInfoForm(request.GET)

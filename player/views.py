@@ -1,6 +1,6 @@
 from django.contrib.auth import get_user_model, authenticate, login, logout
 from django.http import JsonResponse
-from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.csrf import csrf_exempt, csrf_protect
 
 from player.forms import LoginForm, RegisterForm, AddFriendForm, GetPlayerForm
 from player.models import Friend
@@ -70,7 +70,6 @@ def register_view(request):
         return JsonResponse({'status': 'error', 'message': 'Invalid Request'}, status=405)
 
 
-@csrf_exempt
 def logout_view(request):
     if request.method == 'GET':
         if request.user.is_authenticated:
@@ -82,7 +81,6 @@ def logout_view(request):
         return JsonResponse({'status': 'error', 'message': 'Invalid Request'}, status=405)
 
 
-@csrf_exempt
 def add_friend_view(request):
     if request.method == 'GET':
         form = AddFriendForm(request.GET)
@@ -108,7 +106,6 @@ def add_friend_view(request):
         return JsonResponse({'status': 'error', 'message': 'Invalid Request'}, status=405)
 
 
-@csrf_exempt
 def get_friends_view(request):
     if request.method == 'GET':
         if request.user.is_authenticated:
@@ -123,7 +120,6 @@ def get_friends_view(request):
         return JsonResponse({'status': 'error', 'friends': 'Invalid Request'}, status=405)
 
 
-@csrf_exempt
 def delete_friend_view(request):
     if request.method == 'GET':
         form = AddFriendForm(request.GET)
@@ -144,7 +140,6 @@ def delete_friend_view(request):
         return JsonResponse({'status': 'error', 'message': 'Invalid Request'}, status=405)
 
 
-@csrf_exempt
 def get_all_players_view(request):
     if request.method == 'GET':
         return JsonResponse({'status': 'success', 'players': users_dump(User.objects.all())})
@@ -152,7 +147,6 @@ def get_all_players_view(request):
         return JsonResponse({'status': 'error', 'message': 'Invalid Request'}, status=405)
 
 
-@csrf_exempt
 def get_player_view(request):
     if request.method == 'GET':
         form = GetPlayerForm(request.GET)
@@ -164,3 +158,7 @@ def get_player_view(request):
             return JsonResponse({'status': 'error', 'message': form.errors}, status=400)
     else:
         return JsonResponse({'status': 'error', 'message': 'Invalid Request'}, status=405)
+
+
+def page_not_found(request, exception):
+    return JsonResponse({'status': 'error', 'message': 'Page Not Found'}, status=404)

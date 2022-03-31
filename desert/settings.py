@@ -24,7 +24,7 @@ SECRET_KEY = 'django-insecure-%bhmufu^x$y9$#94e@!4d#rfd#k0u_16^ikpz810ioetffrn#^
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -78,6 +78,9 @@ DATABASES = {
         'NAME': BASE_DIR / 'desert.sqlite',
     }
 }
+
+CSRF_COOKIE_NAME = 'csrf_token'
+CSRF_HEADER_NAME = 'X-CSRFToken'
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
