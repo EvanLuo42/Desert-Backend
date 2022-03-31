@@ -1,4 +1,4 @@
 # Desert
-[APIDoc](https://console-docs.apipost.cn/cover.html?url=ac69a20480bcbbfc&salt=db1951e12464d158)
+[APIDoc](https://www.apifox.cn/apidoc/shared-d0eebc73-a6eb-4636-87d4-609228585d53/)
 
-Password: 418104
+Password: `desert_internal`
