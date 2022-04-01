@@ -4,6 +4,10 @@ from django.urls import path
 import player.views
 import song.views
 
+from django_otp.admin import OTPAdminSite
+
+admin.site.__class__ = OTPAdminSite
+
 urlpatterns = [
     path('login/', player.views.login_view),
     path('register/', player.views.register_view),
@@ -19,7 +23,7 @@ urlpatterns = [
     path('song/get/', song.views.get_song_info_view),
     path('song/download/', song.views.download_song_file_view),
     path('scores/get/', song.views.get_top_scores_by_song_id_view),
-    path('admin/', admin.site.urls),
+    path('desert/admin/', admin.site.urls),
 ]
 
 handler404 = player.views.page_not_found
