@@ -3,3 +3,4 @@ __pycache__
 desert.sqlite
 song/migrations
 player/migrations
+static/
