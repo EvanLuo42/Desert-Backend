@@ -19,6 +19,7 @@ def songs_dump(songs):
         'score_author': song.score_author,
         'difficulty': song.difficulty,
         'level': song.level,
+        'file_md5': song.file_md5,
     } for song in songs]
 
 
@@ -30,6 +31,7 @@ def song_dump(song):
         'score_author': song.score_author,
         'difficulty': song.difficulty,
         'level': song.level,
+        'file_md5': song.file_md5,
     }
 
 

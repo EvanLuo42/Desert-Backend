@@ -20,3 +20,4 @@ class SongInfo(models.Model):
     difficulty = models.FloatField(max_length=20)
     level = models.CharField(max_length=20)
     song_file = models.FileField(storage=TencentStorage(), null=True)
+    file_md5 = models.CharField(max_length=128, null=True)
