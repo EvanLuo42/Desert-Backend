@@ -40,11 +40,13 @@ def login_view(request):
             user = authenticate(username=user_name, password=password)
 
             if user:
-                login(request, user)
                 user = User.objects.get(user_name=user_name)
-                request.session['user_id'] = user.user_id
-
-                return JsonResponse({'status': 'success', 'message': 'Login Successful'})
+                if not user.is_superuser:
+                    login(request, user)
+                    request.session['user_id'] = user.user_id
+                    return JsonResponse({'status': 'success', 'message': 'Login Successful'})
+                else:
+                    return JsonResponse({'status': 'success', 'message': 'You can not login a superuser'}, status=401)
             else:
                 return JsonResponse({'status': 'error', 'message': 'Invalid Credentials'}, status=401)
         else:
