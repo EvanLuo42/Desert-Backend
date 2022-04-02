@@ -17,7 +17,7 @@ host = 'https://' + bucket + '.cos.' + region + '.myqcloud.com/'
 
 
 @deconstructible
-class TencentStorage(Storage):
+class SongStorage(Storage):
     def save(self, name, content, max_length=None):
         client.put_object(
             Bucket=bucket,
@@ -31,4 +31,22 @@ class TencentStorage(Storage):
         return str(file_url)
 
     def generate_filename(self, filename):
-        return md5(filename.encode('utf-8')).hexdigest()
+        return md5((filename + str(datetime.datetime.today())).encode('utf-8')).hexdigest() + '.dt'
+
+
+@deconstructible
+class ImageStorage(Storage):
+    def save(self, name, content, max_length=None):
+        client.put_object(
+            Bucket=bucket,
+            Key='image/' + name,
+            Body=content.read()
+        )
+        return name
+
+    def url(self, name):
+        file_url = client.get_object_url(bucket, 'image/' + name)
+        return str(file_url)
+
+    def generate_filename(self, filename):
+        return md5((filename + str(datetime.datetime.today())).encode('utf-8')).hexdigest() + '.jpg'

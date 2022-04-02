@@ -1,6 +1,6 @@
 from django.db import models
 
-from desert.storage import TencentStorage
+from desert.storage import SongStorage, ImageStorage
 
 
 class SongRecord(models.Model):
@@ -19,7 +19,8 @@ class SongInfo(models.Model):
     score_author = models.CharField(max_length=100)
     difficulty = models.FloatField(max_length=20)
     level = models.CharField(max_length=20)
-    song_file = models.FileField(storage=TencentStorage(), null=True)
+    song_file = models.FileField(storage=SongStorage(), null=True)
+    image_file = models.FileField(storage=ImageStorage(), null=True)
     file_md5 = models.CharField(max_length=128, null=True)
 
 
