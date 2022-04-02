@@ -1,11 +1,9 @@
 from django.contrib.auth import get_user_model, authenticate, login, logout
-from django.contrib.auth.forms import PasswordResetForm
 from django.http import JsonResponse
-from django.views.decorators.csrf import csrf_exempt, csrf_protect
+from django.views.decorators.csrf import csrf_exempt
 
 from player.forms import LoginForm, RegisterForm, AddFriendForm, GetPlayerForm
 from player.models import Friend
-from song.models import Announcement
 
 User = get_user_model()
 

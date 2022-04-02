@@ -13,7 +13,6 @@ region = settings.REGION
 bucket = settings.BUCKET
 config = CosConfig(Region=region, Secret_id=secret_id, Secret_key=secret_key)
 client = CosS3Client(config)
-host = 'https://' + bucket + '.cos.' + region + '.myqcloud.com/'
 
 
 @deconstructible
