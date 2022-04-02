@@ -1,3 +1,4 @@
+import time
 from hashlib import md5
 
 from django.core.files.storage import Storage
@@ -30,4 +31,4 @@ class TencentStorage(Storage):
         return str(file_url)
 
     def generate_filename(self, filename):
-        return md5(filename.encode('utf-8')).hexdigest()
+        return md5((filename + str(time.time_ns())).encode('utf-8')).hexdigest()
