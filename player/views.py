@@ -1,4 +1,5 @@
 from django.contrib.auth import get_user_model, authenticate, login, logout
+from django.contrib.auth.forms import PasswordResetForm
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt, csrf_protect
 
