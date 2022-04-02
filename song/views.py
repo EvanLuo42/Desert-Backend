@@ -158,5 +158,10 @@ def get_top_scores_by_song_id_view(request):
 
 def announcement_view(request):
     if request.method == 'GET':
-        announcement = Announcement.objects.order_by('-created_at').first()
-        return JsonResponse({'status': 'success', 'announcement': announcement_dump(announcement)})
+        if Announcement.objects.exists():
+            announcement = Announcement.objects.order_by('-created_at').first()
+            return JsonResponse({'status': 'success', 'announcement': announcement_dump(announcement)})
+        else:
+            return JsonResponse({'status': 'success', 'content': None})
+    else:
+        return JsonResponse({'status': 'error', 'message': 'Invalid request'}, status=405)
