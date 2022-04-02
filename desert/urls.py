@@ -23,6 +23,7 @@ urlpatterns = [
     path('song/get/', song.views.get_song_info_view),
     path('song/download/', song.views.download_song_file_view),
     path('scores/get/', song.views.get_top_scores_by_song_id_view),
+    path('announcement/get/', song.views.announcement_view),
     path('desert/admin/', admin.site.urls),
 ]
 

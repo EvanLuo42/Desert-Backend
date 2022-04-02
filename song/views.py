@@ -5,6 +5,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 from song import models
 from song.forms import UploadScoreForm, GetSongInfoForm
+from song.models import Announcement
 
 SongRecord = models.SongRecord
 SongInfo = models.SongInfo
@@ -53,6 +54,13 @@ def scores_dump(scores):
         'best_score': score.best_score,
         'created_at': score.created_at,
     } for score in scores]
+
+
+def announcement_dump(announcement):
+    return {
+        'announcement_id': announcement.announcement_id,
+        'content': announcement.content,
+    }
 
 
 @csrf_exempt
@@ -146,3 +154,9 @@ def get_top_scores_by_song_id_view(request):
             return JsonResponse({'status': 'error', 'message': form.errors}, status=400)
     else:
         return JsonResponse({'status': 'error', 'message': 'Invalid request'}, status=405)
+
+
+def announcement_view(request):
+    if request.method == 'GET':
+        announcement = Announcement.objects.order_by('-created_at').first()
+        return JsonResponse({'status': 'success', 'announcement': announcement_dump(announcement)})

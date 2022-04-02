@@ -21,3 +21,9 @@ class SongInfo(models.Model):
     level = models.CharField(max_length=20)
     song_file = models.FileField(storage=TencentStorage(), null=True)
     file_md5 = models.CharField(max_length=128, null=True)
+
+
+class Announcement(models.Model):
+    announcement_id = models.BigAutoField(primary_key=True)
+    content = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)

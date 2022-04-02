@@ -4,6 +4,7 @@ from django.views.decorators.csrf import csrf_exempt, csrf_protect
 
 from player.forms import LoginForm, RegisterForm, AddFriendForm, GetPlayerForm
 from player.models import Friend
+from song.models import Announcement
 
 User = get_user_model()
 
