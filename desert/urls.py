@@ -11,6 +11,7 @@ admin.site.__class__ = OTPAdminSite
 urlpatterns = [
     path('login/', player.views.login_view),
     path('register/', player.views.register_view),
+    path('captcha/', player.views.send_captcha_view),
     path('logout/', player.views.logout_view),
     path('player/friend/add/', player.views.add_friend_view),
     path('player/friends/get/', player.views.get_friends_view),

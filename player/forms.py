@@ -1,4 +1,5 @@
 from django.contrib.auth import get_user_model
+from django.core.cache import cache
 from django.forms import Form, fields
 from django.utils.translation import gettext as _
 
@@ -44,12 +45,34 @@ class RegisterForm(Form):
         }
     )
 
+    email = fields.EmailField(
+        required=True,
+        error_messages={
+            'required': _('Email can not be empty.')
+        }
+    )
+
+    captcha = fields.CharField(
+        required=True,
+        error_messages={
+            'required': _('Captcha can not be empty.')
+        }
+    )
+
     def clean_user_name(self):
         user_name = self.cleaned_data.get('user_name')
         if User.objects.filter(user_name=user_name).exists():
             raise fields.ValidationError(_('User is already exist.'))
         else:
             return user_name
+
+    def clean_captcha(self):
+        captcha = self.cleaned_data.get('captcha')
+        email = self.cleaned_data.get('email')
+        if cache.get(email) == captcha:
+            return captcha
+        else:
+            raise fields.ValidationError(_('Captcha is not correct.'))
 
 
 class AddFriendForm(Form):
@@ -82,3 +105,12 @@ class GetPlayerForm(Form):
             return self.cleaned_data.get('user_id')
         else:
             raise fields.ValidationError(_('User does not exist.'))
+
+
+class EmailForm(Form):
+    email = fields.EmailField(
+        required=True,
+        error_messages={
+            'required': _('Email can not be empty.')
+        }
+    )

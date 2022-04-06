@@ -7,8 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: ziyun.luo@icloud.com\n"
-"POT-Creation-Date: 2022-04-06 09:34+0800\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-04-06 13:38+0800\n"
 "PO-Revision-Date: 2022-04-06 09:34+0800\n"
 "Last-Translator: Evan Luo <ziyun.luo@icloud.com>\n"
 "Language: zh-Hans\n"
@@ -17,91 +17,118 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: player/forms.py:14 player/forms.py:34
+#: player/forms.py:15 player/forms.py:35
 msgid "Username can not be empty."
 msgstr "用户名不能为空"
 
-#: player/forms.py:15 player/forms.py:35
+#: player/forms.py:16 player/forms.py:36
 msgid "Username is too short."
 msgstr "用户名过短"
 
-#: player/forms.py:16 player/forms.py:36
+#: player/forms.py:17 player/forms.py:37
 msgid "Username is too long."
 msgstr "用户名过长"
 
-#: player/forms.py:23 player/forms.py:43
+#: player/forms.py:24 player/forms.py:44
 msgid "Password can not be empty."
 msgstr "密码不能为空"
 
-#: player/forms.py:50
+#: player/forms.py:51 player/forms.py:114
+#, fuzzy
+#| msgid "Username can not be empty."
+msgid "Email can not be empty."
+msgstr "用户名不能为空"
+
+#: player/forms.py:58
+#, fuzzy
+#| msgid "Username can not be empty."
+msgid "Captcha can not be empty."
+msgstr "用户名不能为空"
+
+#: player/forms.py:65
 msgid "User is already exist."
 msgstr "用户已存在"
 
-#: player/forms.py:59
+#: player/forms.py:75
+#, fuzzy
+#| msgid "Magic is not correct."
+msgid "Captcha is not correct."
+msgstr "魔法字段错误"
+
+#: player/forms.py:82
 msgid "Friend ID can not be empty."
 msgstr "好友ID不能为空"
 
-#: player/forms.py:68 player/forms.py:84
+#: player/forms.py:91 player/forms.py:107
 msgid "User does not exist."
 msgstr "用户不存在"
 
-#: player/forms.py:75
+#: player/forms.py:98
 msgid "User ID can not be empty."
 msgstr "用户ID不能为空"
 
-#: player/views.py:48
+#: player/views.py:53
 msgid "Login Successful"
 msgstr "登陆成功"
 
-#: player/views.py:50
+#: player/views.py:55
 msgid "You can not login as a superuser"
 msgstr "你不能登陆为超级用户"
 
-#: player/views.py:53
+#: player/views.py:58
 msgid "Invalid Credentials"
 msgstr "用户名或密码不正确"
 
-#: player/views.py:57 player/views.py:74 player/views.py:85 player/views.py:110
-#: player/views.py:124 player/views.py:144 player/views.py:151
-#: player/views.py:164 song/views.py:99 song/views.py:107 song/views.py:119
-#: song/views.py:132 song/views.py:147 song/views.py:160 song/views.py:171
+#: player/views.py:62 player/views.py:80 player/views.py:101
+#: player/views.py:112 player/views.py:137 player/views.py:151
+#: player/views.py:171 player/views.py:178 player/views.py:191 song/views.py:99
+#: song/views.py:107 song/views.py:119 song/views.py:132 song/views.py:147
+#: song/views.py:160 song/views.py:171
 msgid "Invalid Request"
 msgstr "请求方法不合法"
 
-#: player/views.py:70
+#: player/views.py:76
 msgid "Registration Successful"
 msgstr "注册成功"
 
-#: player/views.py:81
+#: player/views.py:91
+msgid "Desert Captcha"
+msgstr "Desert 验证码"
+
+#: player/views.py:97
+msgid "Captcha Sent"
+msgstr ""
+
+#: player/views.py:108
 msgid "Logout Successful"
 msgstr "登出成功"
 
-#: player/views.py:83 player/views.py:106 player/views.py:122
-#: player/views.py:140 song/views.py:95 song/views.py:145
+#: player/views.py:110 player/views.py:133 player/views.py:149
+#: player/views.py:167 song/views.py:95 song/views.py:145
 msgid "You have to login first"
 msgstr "请先登录"
 
-#: player/views.py:96
+#: player/views.py:123
 msgid "You can not add yourself as friend"
 msgstr "你不能添加自己为好友"
 
-#: player/views.py:99
+#: player/views.py:126
 msgid "You have added the friend already"
 msgstr "你已经添加过该好友"
 
-#: player/views.py:104
+#: player/views.py:131
 msgid "Friend Added"
 msgstr "好友添加成功"
 
-#: player/views.py:136
+#: player/views.py:163
 msgid "Friend Deleted"
 msgstr "好友删除成功"
 
-#: player/views.py:138
+#: player/views.py:165
 msgid "You have not added the friend yet"
 msgstr "你还未添加该好友"
 
-#: player/views.py:168
+#: player/views.py:195
 msgid "Page Not Found"
 msgstr "页面不存在"
 

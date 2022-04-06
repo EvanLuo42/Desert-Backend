@@ -1,9 +1,14 @@
+import random
+import string
+
 from django.contrib.auth import get_user_model, authenticate, login, logout
+from django.core.cache import cache
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.translation import gettext as _
+from django.core.mail import send_mail
 
-from player.forms import LoginForm, RegisterForm, AddFriendForm, GetPlayerForm
+from player.forms import LoginForm, RegisterForm, AddFriendForm, GetPlayerForm, EmailForm
 from player.models import Friend
 
 User = get_user_model()
@@ -64,10 +69,32 @@ def register_view(request):
         if form.is_valid():
             user_name = form.cleaned_data.get('user_name')
             password = form.cleaned_data.get('password')
-            user = User.objects.create_user(user_name, password)
+            email = form.cleaned_data.get('email')
+            user = User.objects.create_user(user_name, password, email)
             user.save()
 
             return JsonResponse({'status': 'success', 'message': _('Registration Successful')})
+        else:
+            return JsonResponse({'status': 'error', 'message': form.errors}, status=400)
+    else:
+        return JsonResponse({'status': 'error', 'message': _('Invalid Request')}, status=405)
+
+
+def send_captcha_view(request):
+    if request.method == 'GET':
+        form = EmailForm(request.GET)
+        if form.is_valid():
+            email = form.cleaned_data.get('email')
+            captcha = ''.join(random.sample(string.ascii_letters + string.digits, 5))
+            cache.set(email, captcha, 600 * 5)
+            send_mail(
+                _('Desert Captcha'),
+                captcha,
+                'luo_evan@163.com',
+                [email],
+                fail_silently=False,
+            )
+            return JsonResponse({'status': 'success', 'message': _('Captcha Sent')})
         else:
             return JsonResponse({'status': 'error', 'message': form.errors}, status=400)
     else:

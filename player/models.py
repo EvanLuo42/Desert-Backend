@@ -4,24 +4,28 @@ from django.db import models
 
 
 class PlayerManager(BaseUserManager):
-    def _create_user(self, user_name, password, **kwargs):
+    def _create_user(self, user_name, password, email, **kwargs):
         if not user_name:
             raise ValueError('The given username must be set')
         if not password:
             raise ValueError('The given password must be set')
-        user = self.model(user_name=user_name, **kwargs)
+        if not email:
+            raise ValueError('The given email must be set')
+
+        user = self.model(user_name=user_name, email=email, **kwargs)
         user.set_password(password)
         user.save(using=self._db)
         return user
 
-    def create_user(self, user_name, password, **kwargs):
+    def create_user(self, user_name, password, email, **kwargs):
         kwargs['is_superuser'] = False
-        return self._create_user(user_name, password, **kwargs)
+        kwargs['is_staff'] = False
+        return self._create_user(user_name, password, email, **kwargs)
 
-    def create_superuser(self, user_name, password, **kwargs):
+    def create_superuser(self, user_name, password, email, **kwargs):
         kwargs['is_superuser'] = True
         kwargs['is_staff'] = True
-        return self._create_user(user_name, password, **kwargs)
+        return self._create_user(user_name, password, email, **kwargs)
 
 
 class Player(AbstractBaseUser, PermissionsMixin):
@@ -31,11 +35,12 @@ class Player(AbstractBaseUser, PermissionsMixin):
     is_superuser = models.BooleanField(default=False)
     rank_point = models.FloatField(default=0)
     grade = models.IntegerField(default=1)
+    email = models.EmailField(unique=True)
 
     selected_role = models.CharField(max_length=30, default='')
 
     USERNAME_FIELD = 'user_name'
-    REQUIRED_FIELDS = ['is_staff', 'is_superuser']
+    REQUIRED_FIELDS = ['is_staff', 'is_superuser', 'email']
 
     objects = PlayerManager()
 
