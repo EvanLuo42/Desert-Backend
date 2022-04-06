@@ -1,8 +1,6 @@
 import math
 
 from django.forms import Form, fields
-from werkzeug.security import generate_password_hash, check_password_hash
-
 from song import models
 
 SongInfo = models.SongInfo
