@@ -1,0 +1,138 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: ziyun.luo@icloud.com\n"
+"POT-Creation-Date: 2022-04-06 09:34+0800\n"
+"PO-Revision-Date: 2022-04-06 09:34+0800\n"
+"Last-Translator: Evan Luo <ziyun.luo@icloud.com>\n"
+"Language: zh-Hans\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: player/forms.py:14 player/forms.py:34
+msgid "Username can not be empty."
+msgstr "用户名不能为空"
+
+#: player/forms.py:15 player/forms.py:35
+msgid "Username is too short."
+msgstr "用户名过短"
+
+#: player/forms.py:16 player/forms.py:36
+msgid "Username is too long."
+msgstr "用户名过长"
+
+#: player/forms.py:23 player/forms.py:43
+msgid "Password can not be empty."
+msgstr "密码不能为空"
+
+#: player/forms.py:50
+msgid "User is already exist."
+msgstr "用户已存在"
+
+#: player/forms.py:59
+msgid "Friend ID can not be empty."
+msgstr "好友ID不能为空"
+
+#: player/forms.py:68 player/forms.py:84
+msgid "User does not exist."
+msgstr "用户不存在"
+
+#: player/forms.py:75
+msgid "User ID can not be empty."
+msgstr "用户ID不能为空"
+
+#: player/views.py:48
+msgid "Login Successful"
+msgstr "登陆成功"
+
+#: player/views.py:50
+msgid "You can not login as a superuser"
+msgstr "你不能登陆为超级用户"
+
+#: player/views.py:53
+msgid "Invalid Credentials"
+msgstr "用户名或密码不正确"
+
+#: player/views.py:57 player/views.py:74 player/views.py:85 player/views.py:110
+#: player/views.py:124 player/views.py:144 player/views.py:151
+#: player/views.py:164 song/views.py:99 song/views.py:107 song/views.py:119
+#: song/views.py:132 song/views.py:147 song/views.py:160 song/views.py:171
+msgid "Invalid Request"
+msgstr "请求方法不合法"
+
+#: player/views.py:70
+msgid "Registration Successful"
+msgstr "注册成功"
+
+#: player/views.py:81
+msgid "Logout Successful"
+msgstr "登出成功"
+
+#: player/views.py:83 player/views.py:106 player/views.py:122
+#: player/views.py:140 song/views.py:95 song/views.py:145
+msgid "You have to login first"
+msgstr "请先登录"
+
+#: player/views.py:96
+msgid "You can not add yourself as friend"
+msgstr "你不能添加自己为好友"
+
+#: player/views.py:99
+msgid "You have added the friend already"
+msgstr "你已经添加过该好友"
+
+#: player/views.py:104
+msgid "Friend Added"
+msgstr "好友添加成功"
+
+#: player/views.py:136
+msgid "Friend Deleted"
+msgstr "好友删除成功"
+
+#: player/views.py:138
+msgid "You have not added the friend yet"
+msgstr "你还未添加该好友"
+
+#: player/views.py:168
+msgid "Page Not Found"
+msgstr "页面不存在"
+
+#: song/forms.py:15 song/forms.py:62
+msgid "Song ID can not be null."
+msgstr "曲目ID不能为空"
+
+#: song/forms.py:22
+msgid "Score can not be null."
+msgstr "分数不能为空"
+
+#: song/forms.py:29
+msgid "Rank point can not be null."
+msgstr "Rank点不能为空"
+
+#: song/forms.py:36
+msgid "Magic can not be null."
+msgstr "魔法字段不能为空"
+
+#: song/forms.py:49
+msgid "Magic is not correct."
+msgstr "魔法字段错误"
+
+#: song/forms.py:55 song/forms.py:70
+msgid "Song ID is not exist."
+msgstr "曲目不存在"
+
+#: song/views.py:93
+msgid "Score uploaded successfully"
+msgstr "分数上传成功"
+
+#: song/views.py:143
+msgid "No score"
+msgstr "还没有已上传的分数"

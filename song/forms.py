@@ -1,6 +1,8 @@
 import math
 
 from django.forms import Form, fields
+from django.utils.translation import gettext as _
+
 from song import models
 
 SongInfo = models.SongInfo
@@ -10,28 +12,28 @@ class UploadScoreForm(Form):
     song_id = fields.IntegerField(
         required=True,
         error_messages={
-            'required': 'Song ID can not be null.'
+            'required': _('Song ID can not be null.')
         }
     )
 
     score = fields.IntegerField(
         required=True,
         error_messages={
-            'required': 'Song ID can not be null.'
+            'required': _('Score can not be null.')
         }
     )
 
     rank_point = fields.IntegerField(
         required=True,
         error_messages={
-            'required': 'Rank point can not be null.'
+            'required': _('Rank point can not be null.')
         }
     )
 
     magic = fields.CharField(
         required=True,
         error_messages={
-            'required': 'Magic can not be null.'
+            'required': _('Magic can not be null.')
         }
     )
 
@@ -44,20 +46,20 @@ class UploadScoreForm(Form):
         if str(math.log((song_id << (107 ^ score)) ^ rank_point))[:13] == magic:
             return magic
         else:
-            raise fields.ValidationError('Magic is not correct.')
+            raise fields.ValidationError(_('Magic is not correct.'))
 
     def clean_song_id(self):
         if SongInfo.objects.filter(song_id=self.cleaned_data.get('song_id')).exists():
             return self.cleaned_data.get('song_id')
         else:
-            raise fields.ValidationError('Song ID is not exist.')
+            raise fields.ValidationError(_('Song ID is not exist.'))
 
 
 class GetSongInfoForm(Form):
     song_id = fields.IntegerField(
         required=True,
         error_messages={
-            'required': 'Song ID can not be null.'
+            'required': _('Song ID can not be null.')
         }
     )
 
@@ -65,4 +67,4 @@ class GetSongInfoForm(Form):
         if SongInfo.objects.filter(song_id=self.cleaned_data.get('song_id')).exists():
             return self.cleaned_data.get('song_id')
         else:
-            raise fields.ValidationError('Song ID is not exist.')
+            raise fields.ValidationError(_('Song ID is not exist.'))

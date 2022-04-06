@@ -2,6 +2,7 @@ from django.contrib.auth import get_user_model
 from django.http import JsonResponse
 from django.shortcuts import redirect
 from django.views.decorators.csrf import csrf_exempt
+from django.utils.translation import gettext as _
 
 from desert import settings
 from song import models
@@ -89,13 +90,13 @@ def upload_score_view(request):
 
                 User.objects.filter(user_id=user_id).update(rank_point=rank_point)
 
-                return JsonResponse({'status': 'success', 'message': 'Score uploaded successfully'})
+                return JsonResponse({'status': 'success', 'message': _('Score uploaded successfully')})
             else:
-                return JsonResponse({'status': 'error', 'message': 'You have to login first'}, status=401)
+                return JsonResponse({'status': 'error', 'message': _('You have to login first')}, status=401)
         else:
             return JsonResponse({'status': 'error', 'message': form.errors}, status=400)
     else:
-        return JsonResponse({'status': 'error', 'message': 'Invalid request'}, status=405)
+        return JsonResponse({'status': 'error', 'message': _('Invalid Request')}, status=405)
 
 
 def get_all_songs_info_view(request):
@@ -103,7 +104,7 @@ def get_all_songs_info_view(request):
         songs = SongInfo.objects.all()
         return JsonResponse({'status': 'success', 'songs': songs_dump(songs)})
     else:
-        return JsonResponse({'status': 'error', 'message': 'Invalid request'}, status=405)
+        return JsonResponse({'status': 'error', 'message': _('Invalid Request')}, status=405)
 
 
 def get_song_info_view(request):
@@ -115,7 +116,7 @@ def get_song_info_view(request):
         else:
             return JsonResponse({'status': 'error', 'message': form.errors}, status=400)
     else:
-        return JsonResponse({'status': 'error', 'message': 'Invalid request'}, status=405)
+        return JsonResponse({'status': 'error', 'message': _('Invalid Request')}, status=405)
 
 
 def download_song_file_view(request):
@@ -128,7 +129,7 @@ def download_song_file_view(request):
         else:
             return JsonResponse({'status': 'error', 'message': form.errors}, status=400)
     else:
-        return JsonResponse({'status': 'error', 'message': 'Invalid request'}, status=405)
+        return JsonResponse({'status': 'error', 'message': _('Invalid Request')}, status=405)
 
 
 def get_latest_score_view(request):
@@ -139,11 +140,11 @@ def get_latest_score_view(request):
                 score = SongRecord.objects.filter(user_id=user_id).order_by('-created_at').first()
                 return JsonResponse({'status': 'success', 'score': score_dump(score)})
             else:
-                return JsonResponse({'status': 'error', 'message': 'No score'}, status=404)
+                return JsonResponse({'status': 'error', 'message': _('No score')}, status=404)
         else:
-            return JsonResponse({'status': 'error', 'message': 'You have not logged in yet'}, status=401)
+            return JsonResponse({'status': 'error', 'message': _('You have to login first')}, status=401)
     else:
-        return JsonResponse({'status': 'error', 'message': 'Invalid request'}, status=405)
+        return JsonResponse({'status': 'error', 'message': _('Invalid Request')}, status=405)
 
 
 def get_top_scores_by_song_id_view(request):
@@ -156,7 +157,7 @@ def get_top_scores_by_song_id_view(request):
         else:
             return JsonResponse({'status': 'error', 'message': form.errors}, status=400)
     else:
-        return JsonResponse({'status': 'error', 'message': 'Invalid request'}, status=405)
+        return JsonResponse({'status': 'error', 'message': _('Invalid Request')}, status=405)
 
 
 def announcement_view(request):
@@ -167,7 +168,7 @@ def announcement_view(request):
         else:
             return JsonResponse({'status': 'success', 'content': None})
     else:
-        return JsonResponse({'status': 'error', 'message': 'Invalid request'}, status=405)
+        return JsonResponse({'status': 'error', 'message': _('Invalid Request')}, status=405)
 
 
 def get_api_version_view(request):
