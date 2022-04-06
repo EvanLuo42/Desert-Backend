@@ -4,3 +4,4 @@ desert.sqlite
 song/migrations
 player/migrations
 static/
+locale/zh_Hans/LC_MESSAGES/django.mo
