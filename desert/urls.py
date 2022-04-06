@@ -24,6 +24,7 @@ urlpatterns = [
     path('song/download/', song.views.download_song_file_view),
     path('scores/get/', song.views.get_top_scores_by_song_id_view),
     path('announcement/get/', song.views.announcement_view),
+    path('api/version/get/', song.views.get_api_version_view),
     path('desert/admin/', admin.site.urls),
 ]
 

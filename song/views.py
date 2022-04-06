@@ -1,10 +1,9 @@
-import math
-
 from django.contrib.auth import get_user_model
 from django.http import JsonResponse
 from django.shortcuts import redirect
 from django.views.decorators.csrf import csrf_exempt
 
+from desert import settings
 from song import models
 from song.forms import UploadScoreForm, GetSongInfoForm
 from song.models import Announcement
@@ -169,3 +168,8 @@ def announcement_view(request):
             return JsonResponse({'status': 'success', 'content': None})
     else:
         return JsonResponse({'status': 'error', 'message': 'Invalid request'}, status=405)
+
+
+def get_api_version_view(request):
+    if request.method == 'GET':
+        return JsonResponse({'status': 'success', 'version': settings.API_VERSION})
