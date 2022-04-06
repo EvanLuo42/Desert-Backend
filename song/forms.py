@@ -39,8 +39,8 @@ class UploadScoreForm(Form):
 
     def clean_magic(self):
         magic = self.cleaned_data.get('magic')
-        rank_point = self.changed_data.get('rank_point')
-        score = self.cleaned_data.get('score')
+        rank_point = self.data.get('rank_point')
+        score = self.data.get('score')
         song_id = self.cleaned_data.get('song_id')
 
         if str(math.log((song_id << (107 ^ score)) ^ rank_point))[:13] == magic:

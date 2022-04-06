@@ -68,7 +68,7 @@ class RegisterForm(Form):
 
     def clean_captcha(self):
         captcha = self.cleaned_data.get('captcha')
-        email = self.cleaned_data.get('email')
+        email = self.data.get('email')
         if User.objects.filter(email=email).exists():
             raise fields.ValidationError(_('User is already exist.'))
         else:
@@ -143,8 +143,7 @@ class ResetPasswordForm(Form):
 
     def clean_captcha(self):
         captcha = self.cleaned_data.get('captcha')
-        email = self.cleaned_data.get('email')
-        print(captcha, email)
+        email = self.data.get('email')
         if User.objects.filter(email=email).exists():
             if cache.get(email) == captcha:
                 return captcha
