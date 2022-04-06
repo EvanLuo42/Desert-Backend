@@ -8,7 +8,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.utils.translation import gettext as _
 from django.core.mail import send_mail
 
-from player.forms import LoginForm, RegisterForm, AddFriendForm, GetPlayerForm, EmailForm
+from player.forms import LoginForm, RegisterForm, AddFriendForm, GetPlayerForm, EmailForm, ResetPasswordForm
 from player.models import Friend
 
 User = get_user_model()
@@ -87,6 +87,7 @@ def send_captcha_view(request):
             email = form.cleaned_data.get('email')
             captcha = ''.join(random.sample(string.ascii_letters + string.digits, 5))
             cache.set(email, captcha, 600 * 5)
+            print(cache.get(email))
             send_mail(
                 _('Desert Captcha'),
                 captcha,
@@ -95,6 +96,23 @@ def send_captcha_view(request):
                 fail_silently=False,
             )
             return JsonResponse({'status': 'success', 'message': _('Captcha Sent')})
+        else:
+            return JsonResponse({'status': 'error', 'message': form.errors}, status=400)
+    else:
+        return JsonResponse({'status': 'error', 'message': _('Invalid Request')}, status=405)
+
+
+@csrf_exempt
+def reset_password_view(request):
+    if request.method == 'POST':
+        form = ResetPasswordForm(request.POST)
+        if form.is_valid():
+            email = form.cleaned_data.get('email')
+            password = form.cleaned_data.get('password')
+            user = User.objects.filter(email=email).first()
+            user.set_password(password)
+            user.save()
+            return JsonResponse({'status': 'success', 'message': _('Password Reset')})
         else:
             return JsonResponse({'status': 'error', 'message': form.errors}, status=400)
     else:

@@ -69,10 +69,13 @@ class RegisterForm(Form):
     def clean_captcha(self):
         captcha = self.cleaned_data.get('captcha')
         email = self.cleaned_data.get('email')
-        if cache.get(email) == captcha:
-            return captcha
+        if User.objects.filter(email=email).exists():
+            raise fields.ValidationError(_('User is already exist.'))
         else:
-            raise fields.ValidationError(_('Captcha is not correct.'))
+            if cache.get(email) == captcha:
+                return captcha
+            else:
+                raise fields.ValidationError(_('Captcha is not correct.'))
 
 
 class AddFriendForm(Form):
@@ -114,3 +117,38 @@ class EmailForm(Form):
             'required': _('Email can not be empty.')
         }
     )
+
+
+class ResetPasswordForm(Form):
+    captcha = fields.CharField(
+        required=True,
+        error_messages={
+            'required': _('Captcha can not be empty.')
+        }
+    )
+
+    password = fields.CharField(
+        required=True,
+        error_messages={
+            'required': _('Password can not be empty.')
+        }
+    )
+
+    email = fields.EmailField(
+        required=True,
+        error_messages={
+            'required': _('Email can not be empty.')
+        }
+    )
+
+    def clean_captcha(self):
+        captcha = self.cleaned_data.get('captcha')
+        email = self.cleaned_data.get('email')
+        print(captcha, email)
+        if User.objects.filter(email=email).exists():
+            if cache.get(email) == captcha:
+                return captcha
+            else:
+                raise fields.ValidationError(_('Captcha is not correct.'))
+        else:
+            raise fields.ValidationError(_('User does not exist.'))
