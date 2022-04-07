@@ -1,22 +1,22 @@
-import datetime
+import uuid
 
+from django.core.cache import cache
 from django.http import JsonResponse
 from django.utils.deprecation import MiddlewareMixin
 from django.utils.translation import gettext as _
 
+from desert import settings
+
 
 class RequestRestrictionMiddleware(MiddlewareMixin):
     def process_request(self, request):
-        last_request = request.session.get('last_request')
-        now = datetime.datetime.now()
-        if last_request is not None:
-            last_request = datetime.datetime.strptime(request.session.get('last_request'), '%Y-%m-%d %H:%M:%S.%f')
-            if (now - last_request).seconds < 2:
+        identify = request.session.get('identify')
+        requested_times = cache.get(identify)
+        if requested_times is not None:
+            if int(requested_times) >= settings.REQUEST_LIMIT:
                 return JsonResponse({'status': 'error', 'message': _('To many request')}, status=400)
             else:
-                request.session['last_request'] = str(now)
+                cache.set(identify, requested_times + 1)
         else:
-            request.session['last_request'] = str(now)
-
-
-
+            identify = request.session['identify'] = uuid.uuid4()
+            cache.set(identify, 1, settings.REQUEST_LIMIT_TIME)

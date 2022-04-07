@@ -102,6 +102,18 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+CACHES = {
+    'default': {
+        'BACKEND': 'django_redis.cache.RedisCache',
+        'LOCATION': 'redis://127.0.0.1:6379',
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        },
+    },
+}
+
+SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
+
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 
@@ -150,3 +162,6 @@ EMAIL_HOST_PASSWORD = 'HDUPUHSCXOOAJXZJ'
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 API_VERSION = 'v1.0.0'
+
+REQUEST_LIMIT_TIME = 60
+REQUEST_LIMIT = 10
