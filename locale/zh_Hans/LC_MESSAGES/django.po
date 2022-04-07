@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-04-06 15:12+0800\n"
+"POT-Creation-Date: 2022-04-07 01:49+0000\n"
 "PO-Revision-Date: 2022-04-06 09:34+0800\n"
 "Last-Translator: Evan Luo <ziyun.luo@icloud.com>\n"
 "Language: zh-Hans\n"
@@ -16,6 +16,10 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+
+#: desert/middleware.py:16
+msgid "To many request"
+msgstr "请求次数过多"
 
 #: player/forms.py:15 player/forms.py:35
 msgid "Username can not be empty."
