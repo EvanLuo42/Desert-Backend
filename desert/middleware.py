@@ -11,9 +11,10 @@ class RequestRestrictionMiddleware(MiddlewareMixin):
         now = datetime.datetime.now()
         if last_request is not None:
             last_request = datetime.datetime.strptime(request.session.get('last_request'), '%Y-%m-%d %H:%M:%S.%f')
-            request.session['last_request'] = str(now)
             if (now - last_request).seconds < 2:
                 return JsonResponse({'status': 'error', 'message': _('To many request')}, status=400)
+            else:
+                request.session['last_request'] = str(now)
         else:
             request.session['last_request'] = str(now)
 
