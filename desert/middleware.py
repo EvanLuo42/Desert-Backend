@@ -8,7 +8,6 @@ from django.utils.translation import gettext as _
 class RequestRestrictionMiddleware(MiddlewareMixin):
     def process_request(self, request):
         last_request = request.session.get('last_request')
-        print(last_request)
         now = datetime.datetime.now()
         if last_request is not None:
             last_request = datetime.datetime.strptime(request.session.get('last_request'), '%Y-%m-%d %H:%M:%S.%f')
