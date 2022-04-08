@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import random
 import string
 
@@ -87,7 +88,6 @@ def send_captcha_view(request):
             email = form.cleaned_data.get('email')
             captcha = ''.join(random.sample(string.ascii_letters + string.digits, 5))
             cache.set(email, captcha, 600 * 5)
-            print(cache.get(email))
             send_mail(
                 _('Desert Captcha'),
                 captcha,

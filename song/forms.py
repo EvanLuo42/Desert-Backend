@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import math
 
 from django.forms import Form, fields
@@ -43,7 +44,7 @@ class UploadScoreForm(Form):
         score = self.data.get('score')
         song_id = self.cleaned_data.get('song_id')
 
-        if str(math.log((song_id << (107 ^ score)) ^ rank_point))[:13] == magic:
+        if str(math.log((song_id << (107 ^ score)) % rank_point))[:13] == magic:
             return magic
         else:
             raise fields.ValidationError(_('Magic is not correct.'))

@@ -1,6 +1,6 @@
-Django~=4.0.3
-Werkzeug~=2.0.1
-cos-python-sdk-v5~=1.9.15
-django_otp~=1.1.3
-qrcode~=7.3.1
-django-redis~=5.2.0
+Django
+Werkzeug
+cos-python-sdk-v5
+django_otp
+qrcode
+django-redis

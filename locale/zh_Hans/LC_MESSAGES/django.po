@@ -18,7 +18,7 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #: desert/middleware.py:16
-msgid "To many request"
+msgid "Too many requests"
 msgstr "请求次数过多"
 
 #: player/forms.py:15 player/forms.py:35

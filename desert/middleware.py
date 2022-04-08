@@ -14,7 +14,7 @@ class RequestRestrictionMiddleware(MiddlewareMixin):
         requested_times = cache.get(identify)
         if requested_times is not None:
             if int(requested_times) >= settings.REQUEST_LIMIT:
-                return JsonResponse({'status': 'error', 'message': _('To many request')}, status=400)
+                return JsonResponse({'status': 'error', 'message': _('Too many requests')}, status=400)
             else:
                 cache.set(identify, requested_times + 1)
         else:

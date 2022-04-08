@@ -22,7 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-%bhmufu^x$y9$#94e@!4d#rfd#k0u_16^ikpz810ioetffrn#^'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -67,7 +67,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-            ],
+            ]
         },
     },
 ]
@@ -163,5 +163,5 @@ DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 API_VERSION = 'v1.0.0'
 
-REQUEST_LIMIT_TIME = 60
-REQUEST_LIMIT = 10
+REQUEST_LIMIT_TIME = 600
+REQUEST_LIMIT = 150
