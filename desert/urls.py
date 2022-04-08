@@ -21,6 +21,7 @@ urlpatterns = [
     path('player/friend/delete/', player.views.delete_friend_view),
     path('score/post/', song.views.upload_score_view),
     path('score/get/', song.views.get_latest_score_view),
+    path('scores/get/', song.views.get_all_scores),
     path('songs/get/', song.views.get_all_songs_info_view),
     path('song/get/', song.views.get_song_info_view),
     path('song/download/', song.views.download_song_file_view),

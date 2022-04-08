@@ -148,6 +148,18 @@ def get_latest_score_view(request):
         return JsonResponse({'status': 'error', 'message': _('Invalid Request')}, status=405)
 
 
+def get_all_scores(request):
+    if request.method == 'GET':
+        if request.user.is_authenticated:
+            user_id = request.session.get('user_id')
+            scores = SongRecord.objects.filter(user_id=user_id)
+            return JsonResponse({'status': 'success', 'scores': scores_dump(scores)})
+        else:
+            return JsonResponse({'status': 'error', 'message': _('You have to login first')}, status=401)
+    else:
+        return JsonResponse({'status': 'error', 'message': _('Invalid Request')}, status=405)
+
+
 def get_top_scores_by_song_id_view(request):
     if request.method == 'GET':
         form = GetSongInfoForm(request.GET)
@@ -175,3 +187,5 @@ def announcement_view(request):
 def get_api_version_view(request):
     if request.method == 'GET':
         return JsonResponse({'status': 'success', 'version': settings.API_VERSION})
+    else:
+        return JsonResponse({'status': 'error', 'message': _('Invalid Request')}, status=405)
