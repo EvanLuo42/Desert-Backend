@@ -12,10 +12,11 @@ from song.models import Announcement
 
 SongRecord = models.SongRecord
 SongInfo = models.SongInfo
+SongUnlock = models.SongUnlock
 User = get_user_model()
 
 
-def songs_dump(songs):
+def songs_dump(songs, songs_unlock):
     return [{
         'song_id': song.song_id,
         'song_name': song.song_name,
@@ -25,10 +26,11 @@ def songs_dump(songs):
         'image_url': song.image_file.url,
         'level': song.level,
         'file_md5': song.file_md5,
+        'is_lock': songs_unlock.filter(song_id=song.song_id).exists(),
     } for song in songs]
 
 
-def song_dump(song):
+def song_dump(song, songs_unlock):
     return {
         'song_id': song.song_id,
         'song_name': song.song_name,
@@ -37,6 +39,7 @@ def song_dump(song):
         'difficulty': song.difficulty,
         'image_url': song.image_file.url,
         'level': song.level,
+        'is_lock': songs_unlock.filter(song_id=song.song_id).exists(),
         'file_md5': song.file_md5,
     }
 
@@ -102,8 +105,13 @@ def upload_score_view(request):
 
 def get_all_songs_info_view(request):
     if request.method == 'GET':
-        songs = SongInfo.objects.all()
-        return JsonResponse({'status': 'success', 'songs': songs_dump(songs)})
+        if request.user.is_authenticated:
+            songs = SongInfo.objects.all()
+            user_id = request.session.get('user_id')
+            songs_unlock = SongUnlock.objects.filter(user_id=user_id)
+            return JsonResponse({'status': 'success', 'songs': songs_dump(songs, songs_unlock)})
+        else:
+            return JsonResponse({'status': 'error', 'message': _('You have to login first')}, status=401)
     else:
         return JsonResponse({'status': 'error', 'message': _('Invalid Request')}, status=405)
 
@@ -112,8 +120,13 @@ def get_song_info_view(request):
     if request.method == 'GET':
         form = GetSongInfoForm(request.GET)
         if form.is_valid():
-            return JsonResponse({'status': 'success', 'song': song_dump(
-                SongInfo.objects.filter(song_id=form.clean_song_id()).first())})
+            if request.user.is_authenticated:
+                user_id = request.session.get('user_id')
+                return JsonResponse({'status': 'success', 'song': song_dump(
+                    SongInfo.objects.filter(song_id=form.clean_song_id()).first(),
+                    SongUnlock.objects.filter(user_id=user_id))})
+            else:
+                return JsonResponse({'status': 'error', 'message': _('You have to login first')}, status=401)
         else:
             return JsonResponse({'status': 'error', 'message': form.errors}, status=400)
     else:
