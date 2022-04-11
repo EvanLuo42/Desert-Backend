@@ -1,4 +1,5 @@
 from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
 
 import song.models as song_models
 from plot import models as plot_models
@@ -17,7 +18,7 @@ SongUnlock = song_models.SongUnlock
 def dump_plots(plots, plots_read):
     return [{
         'plot_id': plot.plot_id,
-        'plot_content': plot.content,
+        'plot_content': plot.plot_content,
         'plot_title': plot.plot_title,
         'is_read': plots_read.filter(plot_id=plot.plot_id).exists()
     } for plot in plots]
@@ -26,7 +27,7 @@ def dump_plots(plots, plots_read):
 def dump_plot(plot, plots_read):
     return {
         'plot_id': plot.plot_id,
-        'plot_content': plot.content,
+        'plot_content': plot.plot_content,
         'plot_title': plot.plot_title,
         'is_read': plots_read.filter(plot_id=plot.plot_id).exists()
     }
@@ -80,7 +81,7 @@ def get_plot_info_view(request):
         return JsonResponse({'status': 'error', 'message': _('Invalid Request')}, status=405)
 
 
-def get_all_chapter_view(request):
+def get_all_chapters_view(request):
     if request.method == 'GET':
         if request.user.is_authenticated:
             user_id = request.session.get('user_id')
@@ -93,14 +94,14 @@ def get_all_chapter_view(request):
         return JsonResponse({'status': 'error', 'message': _('Invalid Request')}, status=405)
 
 
-def get_chapter_info(request):
+def get_chapter_info_view(request):
     if request.method == 'GET':
         form = ChapterForm(request.GET)
         if form.is_valid():
             if request.user.is_authenticated:
                 user_id = request.session.get('user_id')
                 chapter_id = form.clean_chapter_id()
-                chapter = Chapter.objects.filter(chapter_id=chapter_id)
+                chapter = Chapter.objects.filter(chapter_id=chapter_id).first()
                 return JsonResponse({'status': 'success',
                                      'chapters': dump_chapter(chapter,
                                                               ChapterUnlock.objects.filter(user_id=user_id))})
@@ -112,6 +113,7 @@ def get_chapter_info(request):
         return JsonResponse({'status': 'error', 'message': _('Invalid Request')}, status=405)
 
 
+@csrf_exempt
 def read_plot_view(request):
     if request.method == 'POST':
         form = PlotForm(request.POST)
@@ -133,7 +135,7 @@ def read_plot_view(request):
                             return JsonResponse({'status': 'success',
                                                  'message': _('You have already unlocked this song')}, status=400)
                         else:
-                            SongUnlock.objects.create(user_id=user_id, plot_id=plot_id,
+                            SongUnlock.objects.create(user_id=user_id,
                                                       song_id=song_info.first().song_id).save()
                             return JsonResponse({'status': 'success', 'message': _('Read plot successfully')})
                     elif chapter.exists():
@@ -141,7 +143,7 @@ def read_plot_view(request):
                             return JsonResponse({'status': 'error',
                                                  'message': _('You have already unlocked this chapter')}, status=400)
                         else:
-                            ChapterUnlock.objects.create(user_id=user_id, plot_id=plot_id,
+                            ChapterUnlock.objects.create(user_id=user_id,
                                                          chapter_id=chapter.first().chapter_id).save()
                             return JsonResponse({'status': 'success', 'message': _('Read plot successfully')})
                     else:

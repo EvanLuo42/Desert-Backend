@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-04-07 01:49+0000\n"
+"POT-Creation-Date: 2022-04-11 03:01+0000\n"
 "PO-Revision-Date: 2022-04-06 09:34+0800\n"
 "Last-Translator: Evan Luo <ziyun.luo@icloud.com>\n"
 "Language: zh-Hans\n"
@@ -17,81 +17,83 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: desert/middleware.py:16
+#: desert/middleware.py:17
 msgid "Too many requests"
 msgstr "请求次数过多"
 
-#: player/forms.py:15 player/forms.py:35
+#: player/forms.py:16 player/forms.py:36
 msgid "Username can not be empty."
 msgstr "用户名不能为空"
 
-#: player/forms.py:16 player/forms.py:36
+#: player/forms.py:17 player/forms.py:37
 msgid "Username is too short."
 msgstr "用户名过短"
 
-#: player/forms.py:17 player/forms.py:37
+#: player/forms.py:18 player/forms.py:38
 msgid "Username is too long."
 msgstr "用户名过长"
 
-#: player/forms.py:24 player/forms.py:44 player/forms.py:133
+#: player/forms.py:25 player/forms.py:45 player/forms.py:134
 msgid "Password can not be empty."
 msgstr "密码不能为空"
 
-#: player/forms.py:51 player/forms.py:117 player/forms.py:140
+#: player/forms.py:52 player/forms.py:118 player/forms.py:141
 #, fuzzy
 #| msgid "Username can not be empty."
 msgid "Email can not be empty."
 msgstr "用户名不能为空"
 
-#: player/forms.py:58 player/forms.py:126
+#: player/forms.py:59 player/forms.py:127
 #, fuzzy
 #| msgid "Username can not be empty."
 msgid "Captcha can not be empty."
 msgstr "用户名不能为空"
 
-#: player/forms.py:65 player/forms.py:73
+#: player/forms.py:66 player/forms.py:74
 msgid "User is already exist."
 msgstr "用户已存在"
 
-#: player/forms.py:78 player/forms.py:151
+#: player/forms.py:79 player/forms.py:152
 #, fuzzy
 #| msgid "Magic is not correct."
 msgid "Captcha is not correct."
 msgstr "魔法字段错误"
 
-#: player/forms.py:85
+#: player/forms.py:86
 msgid "Friend ID can not be empty."
 msgstr "好友ID不能为空"
 
-#: player/forms.py:94 player/forms.py:110 player/forms.py:153
+#: player/forms.py:95 player/forms.py:111 player/forms.py:154
 msgid "User does not exist."
 msgstr "用户不存在"
 
-#: player/forms.py:101
+#: player/forms.py:102
 msgid "User ID can not be empty."
 msgstr "用户ID不能为空"
 
-#: player/views.py:53
+#: player/views.py:54
 msgid "Login Successful"
 msgstr "登陆成功"
 
-#: player/views.py:55
+#: player/views.py:56
 msgid "You can not login as a superuser"
 msgstr "你不能登陆为超级用户"
 
-#: player/views.py:58
+#: player/views.py:59
 msgid "Invalid Credentials"
 msgstr "用户名或密码不正确"
 
-#: player/views.py:62 player/views.py:80 player/views.py:102
+#: player/views.py:63 player/views.py:81 player/views.py:102
 #: player/views.py:119 player/views.py:130 player/views.py:155
 #: player/views.py:169 player/views.py:189 player/views.py:196
-#: player/views.py:209 song/views.py:99 song/views.py:107 song/views.py:119
-#: song/views.py:132 song/views.py:147 song/views.py:160 song/views.py:171
+#: player/views.py:209 plot/views.py:63 plot/views.py:81 plot/views.py:94
+#: plot/views.py:113 plot/views.py:158 song/views.py:103 song/views.py:116
+#: song/views.py:133 song/views.py:146 song/views.py:161 song/views.py:173
+#: song/views.py:186 song/views.py:197 song/views.py:204
 msgid "Invalid Request"
 msgstr "请求方法不合法"
 
-#: player/views.py:76
+#: player/views.py:77
 msgid "Registration Successful"
 msgstr "注册成功"
 
@@ -114,7 +116,9 @@ msgid "Logout Successful"
 msgstr "登出成功"
 
 #: player/views.py:128 player/views.py:151 player/views.py:167
-#: player/views.py:185 song/views.py:95 song/views.py:145
+#: player/views.py:185 plot/views.py:61 plot/views.py:77 plot/views.py:92
+#: plot/views.py:109 plot/views.py:154 song/views.py:99 song/views.py:114
+#: song/views.py:129 song/views.py:159 song/views.py:171
 msgid "You have to login first"
 msgstr "请先登录"
 
@@ -142,34 +146,82 @@ msgstr "你还未添加该好友"
 msgid "Page Not Found"
 msgstr "页面不存在"
 
-#: song/forms.py:15 song/forms.py:62
+#: plot/forms.py:14
+msgid "Plot ID is required"
+msgstr "剧情ID不能为空"
+
+#: plot/forms.py:22
+#, fuzzy
+#| msgid "User does not exist."
+msgid "Plot does not exist"
+msgstr "用户不存在"
+
+#: plot/forms.py:29
+msgid "Chapter ID is required"
+msgstr "章节ID不能为空"
+
+#: plot/forms.py:37
+#, fuzzy
+#| msgid "User does not exist."
+msgid "Chapter does not exist"
+msgstr "用户不存在"
+
+#: plot/views.py:125
+msgid "You have already read this plot"
+msgstr "你已经阅读过该剧情了"
+
+#: plot/views.py:136
+msgid "You have already unlocked this song"
+msgstr "你已经解锁过该歌曲了"
+
+#: plot/views.py:140 plot/views.py:148
+#, fuzzy
+#| msgid "Score uploaded successfully"
+msgid "Read plot successfully"
+msgstr "分数上传成功"
+
+#: plot/views.py:144
+msgid "You have already unlocked this chapter"
+msgstr "你已经解锁过这个章节了"
+
+#: plot/views.py:151
+msgid "This Plot does not belong to any song or chapter"
+msgstr "剧情未绑定任何歌曲或章节"
+
+#: song/forms.py:17 song/forms.py:73
 msgid "Song ID can not be null."
 msgstr "曲目ID不能为空"
 
-#: song/forms.py:22
+#: song/forms.py:24
 msgid "Score can not be null."
 msgstr "分数不能为空"
 
-#: song/forms.py:29
+#: song/forms.py:31
 msgid "Rank point can not be null."
 msgstr "Rank点不能为空"
 
-#: song/forms.py:36
+#: song/forms.py:38
+#, fuzzy
+#| msgid "Score can not be null."
+msgid "Salt can not be null."
+msgstr "分数不能为空"
+
+#: song/forms.py:45
 msgid "Magic can not be null."
 msgstr "魔法字段不能为空"
 
-#: song/forms.py:49
+#: song/forms.py:60
 msgid "Magic is not correct."
 msgstr "魔法字段错误"
 
-#: song/forms.py:55 song/forms.py:70
+#: song/forms.py:66 song/forms.py:81
 msgid "Song ID is not exist."
 msgstr "曲目不存在"
 
-#: song/views.py:93
+#: song/views.py:97
 msgid "Score uploaded successfully"
 msgstr "分数上传成功"
 
-#: song/views.py:143
+#: song/views.py:157
 msgid "No score"
 msgstr "还没有已上传的分数"

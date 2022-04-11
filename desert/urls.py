@@ -2,6 +2,7 @@ from django.contrib import admin
 from django.urls import path
 
 import player.views
+import plot.views
 import song.views
 
 from django_otp.admin import OTPAdminSite
@@ -28,6 +29,11 @@ urlpatterns = [
     path('scores/get/', song.views.get_top_scores_by_song_id_view),
     path('announcement/get/', song.views.announcement_view),
     path('api/version/get/', song.views.get_api_version_view),
+    path('plots/get/', plot.views.get_all_plots_view),
+    path('plot/get/', plot.views.get_plot_info_view),
+    path('chapters/get/', plot.views.get_all_chapters_view),
+    path('chapter/get/', plot.views.get_chapter_info_view),
+    path('plot/read/', plot.views.read_plot_view),
     path('desert/admin/', admin.site.urls),
 ]
 

@@ -19,7 +19,7 @@ class PlotForm(Form):
         if Plot.objects.filter(plot_id=self.cleaned_data.get('plot_id')).exists():
             return self.cleaned_data.get('plot_id')
         else:
-            raise ValueError(_('Plot does not exist'))
+            raise fields.ValidationError(_('Plot does not exist'))
 
 
 class ChapterForm(Form):
@@ -34,4 +34,4 @@ class ChapterForm(Form):
         if Chapter.objects.filter(chapter_id=self.cleaned_data.get('chapter_id')).exists():
             return self.cleaned_data.get('chapter_id')
         else:
-            raise ValueError(_('Chapter does not exist'))
+            raise fields.ValidationError(_('Chapter does not exist'))
