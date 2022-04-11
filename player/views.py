@@ -4,10 +4,10 @@ import string
 
 from django.contrib.auth import get_user_model, authenticate, login, logout
 from django.core.cache import cache
+from django.core.mail import send_mail
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.translation import gettext as _
-from django.core.mail import send_mail
 
 from player.forms import LoginForm, RegisterForm, AddFriendForm, GetPlayerForm, EmailForm, ResetPasswordForm
 from player.models import Friend
@@ -71,6 +71,7 @@ def register_view(request):
             user_name = form.cleaned_data.get('user_name')
             password = form.cleaned_data.get('password')
             email = form.cleaned_data.get('email')
+            birth = form.cleaned_data.get('birth')
             user = User.objects.create_user(user_name, password, email)
             user.save()
 
@@ -81,7 +82,7 @@ def register_view(request):
         return JsonResponse({'status': 'error', 'message': _('Invalid Request')}, status=405)
 
 
-def send_captcha_view(request):
+async def send_captcha_view(request):
     if request.method == 'GET':
         form = EmailForm(request.GET)
         if form.is_valid():
