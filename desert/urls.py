@@ -1,5 +1,7 @@
+from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, re_path
+from django.views.static import serve
 
 import player.views
 import plot.views
@@ -8,6 +10,8 @@ import song.views
 from django_otp.admin import OTPAdminSite
 
 admin.site.__class__ = OTPAdminSite
+
+from desert import settings
 
 urlpatterns = [
     path('login/', player.views.login_view),
@@ -35,6 +39,7 @@ urlpatterns = [
     path('chapter/get/', plot.views.get_chapter_info_view),
     path('plot/read/', plot.views.read_plot_view),
     path('desert/admin/', admin.site.urls),
+    re_path('static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT}),
 ]
 
 handler404 = player.views.page_not_found
