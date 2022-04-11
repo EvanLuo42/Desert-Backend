@@ -1,17 +1,17 @@
 from django.http import JsonResponse
 
-import song
-from plot import models
+import song.models as song_models
+from plot import models as plot_models
 from django.utils.translation import gettext as _
 
 from plot.forms import PlotForm, ChapterForm
 
-Plot = models.Plot
-Chapter = models.Chapter
-ChapterUnlock = models.ChapterUnlock
-PlotRead = models.PlotRead
-SongInfo = song.SongInfo
-SongUnlock = song.SongUnlock
+Plot = plot_models.Plot
+Chapter = plot_models.Chapter
+ChapterUnlock = plot_models.ChapterUnlock
+PlotRead = plot_models.PlotRead
+SongInfo = song_models.SongInfo
+SongUnlock = song_models.SongUnlock
 
 
 def dump_plots(plots, plots_read):

@@ -15,11 +15,11 @@ class Plot(models.Model):
 
 class ChapterUnlock(models.Model):
     id = models.BigAutoField(primary_key=True)
-    chapter_id = models.IntegerField()
-    user_id = models.IntegerField()
+    chapter_id = models.IntegerField(null=True)
+    user_id = models.IntegerField(null=True)
 
 
 class PlotRead(models.Model):
     id = models.BigAutoField(primary_key=True)
-    plot_id = models.IntegerField()
-    user_id = models.IntegerField()
+    plot_id = models.IntegerField(null=True)
+    user_id = models.IntegerField(null=True)
