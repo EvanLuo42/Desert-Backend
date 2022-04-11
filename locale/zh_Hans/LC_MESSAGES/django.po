@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-04-11 03:01+0000\n"
+"POT-Creation-Date: 2022-04-11 05:19+0000\n"
 "PO-Revision-Date: 2022-04-06 09:34+0800\n"
 "Last-Translator: Evan Luo <ziyun.luo@icloud.com>\n"
 "Language: zh-Hans\n"
@@ -87,7 +87,7 @@ msgstr "用户名或密码不正确"
 #: player/views.py:119 player/views.py:130 player/views.py:155
 #: player/views.py:169 player/views.py:189 player/views.py:196
 #: player/views.py:209 plot/views.py:63 plot/views.py:81 plot/views.py:94
-#: plot/views.py:113 plot/views.py:158 song/views.py:103 song/views.py:116
+#: plot/views.py:113 plot/views.py:161 song/views.py:103 song/views.py:116
 #: song/views.py:133 song/views.py:146 song/views.py:161 song/views.py:173
 #: song/views.py:186 song/views.py:197 song/views.py:204
 msgid "Invalid Request"
@@ -117,7 +117,7 @@ msgstr "登出成功"
 
 #: player/views.py:128 player/views.py:151 player/views.py:167
 #: player/views.py:185 plot/views.py:61 plot/views.py:77 plot/views.py:92
-#: plot/views.py:109 plot/views.py:154 song/views.py:99 song/views.py:114
+#: plot/views.py:109 plot/views.py:157 song/views.py:99 song/views.py:114
 #: song/views.py:129 song/views.py:159 song/views.py:171
 msgid "You have to login first"
 msgstr "请先登录"
@@ -175,10 +175,8 @@ msgid "You have already unlocked this song"
 msgstr "你已经解锁过该歌曲了"
 
 #: plot/views.py:140 plot/views.py:148
-#, fuzzy
-#| msgid "Score uploaded successfully"
 msgid "Read plot successfully"
-msgstr "分数上传成功"
+msgstr "解锁剧情成功"
 
 #: plot/views.py:144
 msgid "You have already unlocked this chapter"
@@ -187,6 +185,10 @@ msgstr "你已经解锁过这个章节了"
 #: plot/views.py:151
 msgid "This Plot does not belong to any song or chapter"
 msgstr "剧情未绑定任何歌曲或章节"
+
+#: plot/views.py:155
+msgid "Please read the previous plot first"
+msgstr "请先解锁前一个剧情"
 
 #: song/forms.py:17 song/forms.py:73
 msgid "Song ID can not be null."

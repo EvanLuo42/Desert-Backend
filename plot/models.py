@@ -23,3 +23,9 @@ class PlotRead(models.Model):
     id = models.BigAutoField(primary_key=True)
     plot_id = models.IntegerField(null=True)
     user_id = models.IntegerField(null=True)
+
+
+class Character(models.Model):
+    character_id = models.BigAutoField(primary_key=True)
+    character_name = models.CharField(max_length=255)
+

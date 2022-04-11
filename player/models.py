@@ -37,7 +37,7 @@ class Player(AbstractBaseUser, PermissionsMixin):
     grade = models.IntegerField(default=1)
     email = models.EmailField(unique=True, null=True)
 
-    selected_role = models.CharField(max_length=30, default='')
+    selected_role = models.IntegerField(default=1)
 
     USERNAME_FIELD = 'user_name'
     REQUIRED_FIELDS = ['is_staff', 'is_superuser', 'email']

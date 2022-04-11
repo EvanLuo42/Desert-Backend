@@ -124,7 +124,7 @@ def read_plot_view(request):
                 if PlotRead.objects.filter(user_id=user_id, plot_id=plot_id).exists():
                     return JsonResponse({'status': 'error', 'message': _('You have already read this plot')},
                                         status=400)
-                else:
+                elif plot_id == 1 or PlotRead.objects.filter(user_id=user_id, plot_id=plot_id - 1).exists():
                     plot = PlotRead.objects.create(user_id=user_id, plot_id=plot_id)
                     plot.save()
                     song_info = SongInfo.objects.filter(plot_id=plot_id)
@@ -150,6 +150,9 @@ def read_plot_view(request):
                         return JsonResponse({'status': 'error',
                                              'message': _('This Plot does not belong to any song or chapter')},
                                             status=400)
+                else:
+                    return JsonResponse({'status': 'error',
+                                         'message': _('Please read the previous plot first')}, status=400)
             else:
                 return JsonResponse({'status': 'error', 'message': _('You have to login first')}, status=401)
         else:
