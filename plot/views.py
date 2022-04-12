@@ -131,6 +131,7 @@ def get_item_by_id_view(request):
                                                           'you can contact us by email to get another one')})
                     else:
                         CharacterUnlock.objects.create(user_id=user_id, character_id=character_id).save()
+                        Item.objects.filter(item_id=item_id).delete()
                         return JsonResponse({'status': 'success', 'message': _('Character unlocked')})
                 else:
                     return JsonResponse({'status': 'error', 'message': _('Invalid item')})

@@ -90,7 +90,7 @@ def register_view(request):
             password = form.cleaned_data.get('password')
             email = form.cleaned_data.get('email')
             birth = form.cleaned_data.get('birth')
-            user = User.objects.create_user(user_name, password, email)
+            user = User.objects.create_user(user_name, password, email, birth)
             user.save()
 
             return JsonResponse({'status': 'success', 'message': _('Registration Successful')})
@@ -242,6 +242,7 @@ def get_all_unlocked_character_view(request):
         return JsonResponse({'status': 'error', 'message': _('Invalid Request')}, status=405)
 
 
+@csrf_exempt
 def select_role_view(request):
     if request.method == 'POST':
         form = CharacterForm(request.POST)

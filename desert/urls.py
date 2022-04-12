@@ -22,6 +22,8 @@ urlpatterns = [
     path('player/friends/get/', player.views.get_friends_view),
     path('players/get/', player.views.get_all_players_view),
     path('player/get/', player.views.get_player_view),
+    path('player/roles/get/', player.views.get_all_unlocked_character_view),
+    path('player/role/select/', player.views.select_role_view),
     path('player/friend/delete/', player.views.delete_friend_view),
     path('score/post/', song.views.upload_score_view),
     path('score/get/', song.views.get_latest_score_view),
@@ -37,6 +39,7 @@ urlpatterns = [
     path('chapters/get/', plot.views.get_all_chapters_view),
     path('chapter/get/', plot.views.get_chapter_info_view),
     path('plot/read/', plot.views.read_plot_view),
+    path('item/get/', plot.views.get_item_by_id_view),
     path('desert/admin/', admin.site.urls),
     re_path('static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT}),
 ]

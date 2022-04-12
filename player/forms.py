@@ -55,6 +55,13 @@ class RegisterForm(Form):
         }
     )
 
+    birth = fields.DateField(
+        required=True,
+        error_messages={
+            'required': _('Birth can not be empty.')
+        }
+    )
+
     captcha = fields.CharField(
         required=True,
         error_messages={
