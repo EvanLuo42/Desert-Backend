@@ -1,4 +1,3 @@
-from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, re_path
 from django.views.static import serve
@@ -7,11 +6,11 @@ import player.views
 import plot.views
 import song.views
 
+from desert import settings
+
 from django_otp.admin import OTPAdminSite
 
 admin.site.__class__ = OTPAdminSite
-
-from desert import settings
 
 urlpatterns = [
     path('login/', player.views.login_view),

@@ -5,6 +5,7 @@ from plot import models
 
 Plot = models.Plot
 Chapter = models.Chapter
+Item = models.Item
 
 
 class PlotForm(Form):
@@ -35,3 +36,18 @@ class ChapterForm(Form):
             return self.cleaned_data.get('chapter_id')
         else:
             raise fields.ValidationError(_('Chapter does not exist'))
+
+
+class ItemForm(Form):
+    item_id = fields.UUIDField(
+        required=True,
+        error_messages={
+            'required': _('Item ID is required')
+        }
+    )
+
+    def clean_item_id(self):
+        if Item.objects.filter(item_id=self.cleaned_data.get('item_id')).exists():
+            return self.cleaned_data.get('item_id')
+        else:
+            raise fields.ValidationError(_('Item does not exist'))

@@ -4,6 +4,8 @@ from django.core.cache import cache
 from django.forms import Form, fields
 from django.utils.translation import gettext as _
 
+from plot.models import Character
+
 User = get_user_model()
 
 
@@ -152,3 +154,18 @@ class ResetPasswordForm(Form):
                 raise fields.ValidationError(_('Captcha is not correct.'))
         else:
             raise fields.ValidationError(_('User does not exist.'))
+
+
+class CharacterForm(Form):
+    character_id = fields.IntegerField(
+        required=True,
+        error_messages={
+            'required': _('Character ID can not be empty.')
+        }
+    )
+
+    def clean_character_id(self):
+        if Character.objects.filter(character_id=self.cleaned_data.get('character_id')).exists():
+            return self.cleaned_data.get('character_id')
+        else:
+            raise fields.ValidationError(_('Character does not exist.'))

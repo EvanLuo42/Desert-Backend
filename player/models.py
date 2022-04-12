@@ -40,12 +40,12 @@ class Player(AbstractBaseUser, PermissionsMixin):
     rank_point = models.FloatField(default=0)
     grade = models.IntegerField(default=1)
     email = models.EmailField(unique=True, null=True)
-    birth = models.DateField(null=True)
+    birth = models.DateField(default=datetime.date.today())
 
     selected_role = models.IntegerField(default=1)
 
     USERNAME_FIELD = 'user_name'
-    REQUIRED_FIELDS = ['is_staff', 'is_superuser', 'email']
+    REQUIRED_FIELDS = ['is_staff', 'is_superuser', 'email', 'birth']
 
     objects = PlayerManager()
 

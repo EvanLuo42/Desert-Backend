@@ -5,7 +5,7 @@ import song.models as song_models
 from plot import models as plot_models
 from django.utils.translation import gettext as _
 
-from plot.forms import PlotForm, ChapterForm
+from plot.forms import PlotForm, ChapterForm, ItemForm
 
 Plot = plot_models.Plot
 Chapter = plot_models.Chapter
@@ -13,6 +13,8 @@ ChapterUnlock = plot_models.ChapterUnlock
 PlotRead = plot_models.PlotRead
 SongInfo = song_models.SongInfo
 SongUnlock = song_models.SongUnlock
+Item = plot_models.Item
+CharacterUnlock = plot_models.CharacterUnlock
 
 
 def dump_plots(plots, plots_read):
@@ -105,6 +107,33 @@ def get_chapter_info_view(request):
                 return JsonResponse({'status': 'success',
                                      'chapters': dump_chapter(chapter,
                                                               ChapterUnlock.objects.filter(user_id=user_id))})
+            else:
+                return JsonResponse({'status': 'error', 'message': _('You have to login first')}, status=401)
+        else:
+            return JsonResponse({'status': 'error', 'message': form.errors}, status=400)
+    else:
+        return JsonResponse({'status': 'error', 'message': _('Invalid Request')}, status=405)
+
+
+def get_item_by_id_view(request):
+    if request.method == 'GET':
+        form = ItemForm(request.GET)
+        if form.is_valid():
+            if request.user.is_authenticated:
+                user_id = request.session.get('user_id')
+                item_id = form.clean_item_id()
+                item = Item.objects.filter(item_id=item_id).first()
+                if item.item_name.startswith('character_'):
+                    character_id = int(item.item_name.split('_')[1])
+                    if CharacterUnlock.objects.filter(character_id=character_id).exists():
+                        return JsonResponse({'status': 'error',
+                                             'message': _('You have already unlocked this character, '
+                                                          'you can contact us by email to get another one')})
+                    else:
+                        CharacterUnlock.objects.create(user_id=user_id, character_id=character_id).save()
+                        return JsonResponse({'status': 'success', 'message': _('Character unlocked')})
+                else:
+                    return JsonResponse({'status': 'error', 'message': _('Invalid item')})
             else:
                 return JsonResponse({'status': 'error', 'message': _('You have to login first')}, status=401)
         else:

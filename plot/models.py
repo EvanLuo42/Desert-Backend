@@ -1,3 +1,5 @@
+import uuid
+
 from django.db import models
 
 
@@ -28,4 +30,15 @@ class PlotRead(models.Model):
 class Character(models.Model):
     character_id = models.BigAutoField(primary_key=True)
     character_name = models.CharField(max_length=255)
+
+
+class CharacterUnlock(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    character_id = models.IntegerField(null=True)
+    user_id = models.IntegerField(null=True)
+
+
+class Item(models.Model):
+    item_id = models.UUIDField(primary_key=True, editable=False, default=uuid.uuid4)
+    item_name = models.CharField(max_length=255)
 

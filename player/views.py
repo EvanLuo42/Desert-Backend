@@ -9,10 +9,14 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.translation import gettext as _
 
-from player.forms import LoginForm, RegisterForm, AddFriendForm, GetPlayerForm, EmailForm, ResetPasswordForm
+from player.forms import LoginForm, RegisterForm, AddFriendForm, GetPlayerForm, EmailForm, ResetPasswordForm, \
+    CharacterForm
 from player.models import Friend
+from plot import models
 
 User = get_user_model()
+Character = models.Character
+CharacterUnlock = models.CharacterUnlock
 
 
 def users_dump(users):
@@ -34,6 +38,20 @@ def user_dump(user):
         'grade': user.grade,
         'selected_role': user.selected_role,
         'last_login': str(user.last_login),
+    }
+
+
+def characters_dump(unlocked_characters):
+    return [{
+        'character_id': character.character_id,
+        'character_name': Character.objects.filter(character_id=character.character_id).first().character_name,
+    } for character in unlocked_characters]
+
+
+def character_dump(character, character_name):
+    return {
+        'character_id': character.character_id,
+        'character_name': character_name,
     }
 
 
@@ -142,7 +160,8 @@ def add_friend_view(request):
                     return JsonResponse({'status': 'error', 'message': _('You can not add yourself as friend')},
                                         status=400)
                 elif [friend.user_id == user_id for friend in Friend.objects.filter(friend_id=friend_id)]:
-                    return JsonResponse({'status': 'error', 'message': _('You have added the friend already')}, status=400)
+                    return JsonResponse({'status': 'error', 'message': _('You have added the friend already')},
+                                        status=400)
                 else:
                     friend = Friend.objects.create(user_id=user_id, friend_id=friend_id)
                     friend.save()
@@ -181,7 +200,8 @@ def delete_friend_view(request):
                     Friend.objects.filter(friend_id=friend_id, user_id=user_id).delete()
                     return JsonResponse({'status': 'success', 'message': _('Friend Deleted')})
                 else:
-                    return JsonResponse({'status': 'error', 'message': _('You have not added the friend yet')}, status=404)
+                    return JsonResponse({'status': 'error', 'message': _('You have not added the friend yet')},
+                                        status=404)
             else:
                 return JsonResponse({'status': 'error', 'message': _('You have to login first')}, status=401)
         else:
@@ -204,6 +224,38 @@ def get_player_view(request):
             user_id = form.clean_user_id()
             user = User.objects.get(user_id=user_id)
             return JsonResponse({'status': 'success', 'player': user_dump(user)})
+        else:
+            return JsonResponse({'status': 'error', 'message': form.errors}, status=400)
+    else:
+        return JsonResponse({'status': 'error', 'message': _('Invalid Request')}, status=405)
+
+
+def get_all_unlocked_character_view(request):
+    if request.method == 'GET':
+        if request.user.is_authenticated:
+            user_id = request.session.get('user_id')
+            unlocked_characters = CharacterUnlock.objects.filter(user_id=user_id)
+            return JsonResponse({'status': 'success', 'characters': characters_dump(unlocked_characters)})
+        else:
+            return JsonResponse({'status': 'error', 'message': _('You have to login first')}, status=401)
+    else:
+        return JsonResponse({'status': 'error', 'message': _('Invalid Request')}, status=405)
+
+
+def select_role_view(request):
+    if request.method == 'POST':
+        form = CharacterForm(request.POST)
+        if form.is_valid():
+            if request.user.is_authenticated:
+                user_id = request.session.get('user_id')
+                if CharacterUnlock.objects.filter(user_id=user_id, character_id=form.clean_character_id()).exists():
+                    User.objects.filter(user_id=user_id).update(selected_role=form.clean_character_id())
+                    return JsonResponse({'status': 'success', 'message': _('Role Selected')})
+                else:
+                    return JsonResponse({'status': 'error', 'message': _('You have not unlocked this character yet')},
+                                        status=404)
+            else:
+                return JsonResponse({'status': 'error', 'message': _('You have to login first')}, status=401)
         else:
             return JsonResponse({'status': 'error', 'message': form.errors}, status=400)
     else:
