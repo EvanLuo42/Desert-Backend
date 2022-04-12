@@ -39,8 +39,8 @@ class Player(AbstractBaseUser, PermissionsMixin):
     is_superuser = models.BooleanField(default=False)
     rank_point = models.FloatField(default=0)
     grade = models.IntegerField(default=1)
-    email = models.EmailField(unique=True, null=True)
-    birth = models.DateField(default=datetime.date.today())
+    email = models.EmailField(unique=True)
+    birth = models.DateField()
 
     selected_role = models.IntegerField(default=1)
 

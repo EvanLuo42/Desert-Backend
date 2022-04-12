@@ -19,11 +19,11 @@ class SongInfo(models.Model):
     score_author = models.CharField(max_length=100)
     difficulty = models.FloatField(max_length=20)
     level = models.CharField(max_length=20)
-    chapter_id = models.IntegerField(null=True)
-    plot_id = models.IntegerField(null=True)
-    song_file = models.FileField(storage=SongStorage(), null=True)
-    image_file = models.FileField(storage=ImageStorage(), null=True)
-    file_md5 = models.CharField(max_length=128, null=True)
+    chapter_id = models.IntegerField()
+    plot_id = models.IntegerField()
+    song_file = models.FileField(storage=SongStorage())
+    image_file = models.FileField(storage=ImageStorage())
+    file_md5 = models.CharField(max_length=128)
 
 
 class SongUnlock(models.Model):

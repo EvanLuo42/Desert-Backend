@@ -23,8 +23,8 @@ class ChapterUnlock(models.Model):
 
 class PlotRead(models.Model):
     id = models.BigAutoField(primary_key=True)
-    plot_id = models.IntegerField(null=True)
-    user_id = models.IntegerField(null=True)
+    plot_id = models.IntegerField()
+    user_id = models.IntegerField()
 
 
 class Character(models.Model):
