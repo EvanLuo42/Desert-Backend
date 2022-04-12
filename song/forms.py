@@ -1,6 +1,4 @@
 # -*- coding: utf-8 -*-
-import math
-
 from django.forms import Form, fields
 from django.utils.translation import gettext as _
 

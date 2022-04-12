@@ -8,6 +8,7 @@ Password: `desert_internal`
 2. 运行`pip install -r requirements.txt`安装依赖
 3. 在项目根目录运行`python3 manage.py makemigrations player`生成`Player`的数据库表
 4. 在项目根目录运行`python3 manage.py makemigrations song`生成`Song`的数据库表
-5. 在项目根目录运行`python3 manage.py migrate`执行建表
-6. 在项目根目录运行`python3 manage.py compliemessages`生成二进制语言文件
-7. 配置并点击`Pycharm`右上角的`Run desert`运行服务器
+5. 在项目根目录运行`python3 manage.py makemigrations plot`生成`Plot`的数据库表
+6. 在项目根目录运行`python3 manage.py migrate`执行建表
+7. 在项目根目录运行`python3 manage.py compliemessages`生成二进制语言文件
+8. 在项目根目录运行`gunicorn desert.wsgi -w 5 -k gevent -b 0.0.0.0:8000`运行服务器

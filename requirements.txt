@@ -4,3 +4,4 @@ cos-python-sdk-v5
 django_otp
 qrcode
 django-redis
+gunicorn

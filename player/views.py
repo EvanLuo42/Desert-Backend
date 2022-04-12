@@ -100,7 +100,7 @@ def register_view(request):
         return JsonResponse({'status': 'error', 'message': _('Invalid Request')}, status=405)
 
 
-async def send_captcha_view(request):
+def send_captcha_view(request):
     if request.method == 'GET':
         form = EmailForm(request.GET)
         if form.is_valid():
@@ -112,7 +112,7 @@ async def send_captcha_view(request):
                 captcha,
                 'luo_evan@163.com',
                 [email],
-                fail_silently=False,
+                fail_silently=True,
             )
             return JsonResponse({'status': 'success', 'message': _('Captcha Sent')})
         else:
