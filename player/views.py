@@ -2,6 +2,7 @@
 import random
 import string
 
+import requests
 from django.contrib.auth import get_user_model, authenticate, login, logout
 from django.core.cache import cache
 from django.core.mail import send_mail

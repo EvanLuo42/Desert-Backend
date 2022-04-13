@@ -19,3 +19,9 @@ class RequestRestrictionMiddleware(MiddlewareMixin):
                 cache.set(identify, requested_times + 1)
         else:
             cache.set(identify, 1, settings.REQUEST_LIMIT_TIME)
+
+
+class ServerSafeGuardMiddleware(MiddlewareMixin):
+    def process_request(self, request):
+        if settings.SAFEGUARD_MODE:
+            return JsonResponse({'status': 'error', 'message': _('Server is under maintenance')}, status=503)
