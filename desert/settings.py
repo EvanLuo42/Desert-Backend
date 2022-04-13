@@ -47,7 +47,9 @@ MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
-    'desert.middleware.RequestRestrictionMiddleware',
+    'desert.middleware.RateLimitMiddleware',
+    'desert.middleware.ServerSafeGuardMiddleware',
+    'desert.middleware.UserAgentMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -168,7 +170,7 @@ DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 API_VERSION = 'v1.0.0'
 
-REQUEST_LIMIT_TIME = 60
-REQUEST_LIMIT = 100000
+REQUEST_LIMIT_TIME = 600
+REQUEST_LIMIT = 200
 
 SAFEGUARD_MODE = False
