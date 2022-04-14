@@ -2,6 +2,7 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 
 import song.models as song_models
+from desert import constant
 from plot import models as plot_models
 from django.utils.translation import gettext as _
 
@@ -54,7 +55,7 @@ def dump_chapter(chapter, chapters_unlock):
 
 
 def get_all_plots_view(request):
-    if request.method == 'GET':
+    if request.method == constant.GET_METHOD:
         if request.user.is_authenticated:
             user_id = request.session.get('user_id')
             plots_read = PlotRead.objects.filter(user_id=user_id)
@@ -66,7 +67,7 @@ def get_all_plots_view(request):
 
 
 def get_plot_info_view(request):
-    if request.method == 'GET':
+    if request.method == constant.GET_METHOD:
         form = PlotForm(request.GET)
         if form.is_valid():
             if request.user.is_authenticated:
@@ -84,7 +85,7 @@ def get_plot_info_view(request):
 
 
 def get_all_chapters_view(request):
-    if request.method == 'GET':
+    if request.method == constant.GET_METHOD:
         if request.user.is_authenticated:
             user_id = request.session.get('user_id')
             chapters = Chapter.objects.all()
@@ -97,7 +98,7 @@ def get_all_chapters_view(request):
 
 
 def get_chapter_info_view(request):
-    if request.method == 'GET':
+    if request.method == constant.GET_METHOD:
         form = ChapterForm(request.GET)
         if form.is_valid():
             if request.user.is_authenticated:
@@ -116,7 +117,7 @@ def get_chapter_info_view(request):
 
 
 def get_item_by_id_view(request):
-    if request.method == 'GET':
+    if request.method == constant.GET_METHOD:
         form = ItemForm(request.GET)
         if form.is_valid():
             if request.user.is_authenticated:
@@ -145,7 +146,7 @@ def get_item_by_id_view(request):
 
 @csrf_exempt
 def read_plot_view(request):
-    if request.method == 'POST':
+    if request.method == constant.POST_METHOD:
         form = PlotForm(request.POST)
         if form.is_valid():
             if request.user.is_authenticated:

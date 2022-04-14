@@ -3,7 +3,7 @@ from django.http import JsonResponse
 from django.utils.deprecation import MiddlewareMixin
 from django.utils.translation import gettext as _
 
-from desert import settings
+from desert import settings, constant
 
 
 class RateLimitMiddleware(MiddlewareMixin):
@@ -28,12 +28,11 @@ class ServerSafeGuardMiddleware(MiddlewareMixin):
 class UserAgentMiddleware(MiddlewareMixin):
     def process_request(self, request):
         user_agent = request.headers.get('User-Agent').split(' ')
-        if request.path.find('/desert/admin/') != -1 or request.path.find('/static/') != -1:
+        if [request.path.find(path) for path in constant.USER_AGENT_IGNORE]:
             pass
         elif len(user_agent) != 2 or len(user_agent[1].split('/')) != 2:
             return JsonResponse({'status': 'error', 'message': _('Argument missing')}, status=400)
-        elif user_agent[0] != 'Desert/' + settings.API_VERSION:
+        elif user_agent[0] != constant.PROJECT_NAME + '/' + settings.API_VERSION:
             return JsonResponse({'status': 'error', 'message': _('API version does not support')}, status=400)
-        elif user_agent[1].split('/')[0] != 'Android' and user_agent[1].split('/')[0] != 'iOS' \
-                and user_agent[1].split('/')[0] != 'iPadOS':
+        elif user_agent[1].split('/')[0] not in constant.SUPPORT_DEVICE:
             return JsonResponse({'status': 'error', 'message': _('Platform does not support')}, status=400)

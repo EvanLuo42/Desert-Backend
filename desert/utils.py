@@ -1,3 +1,7 @@
+import datetime
+from hashlib import md5
+
+
 class SHA256:
     def __init__(self):
         self.constants = (
@@ -58,3 +62,7 @@ class SHA256:
         return "".join(format(h, "02x") for h in b"".join(
             d.to_bytes(4, "big") for d in [(x + y) & ((2 ** 32) - 1)
                                            for x, y in zip(digest, (A, B, C, D, E, F, G, H))]))
+
+
+def generate_filename(filename, extension):
+    return md5((filename + str(datetime.datetime.today()))).hexdigest() + "." + extension

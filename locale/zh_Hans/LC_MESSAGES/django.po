@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-04-13 01:22+0000\n"
+"POT-Creation-Date: 2022-04-14 01:15+0000\n"
 "PO-Revision-Date: 2022-04-06 09:34+0800\n"
 "Last-Translator: Evan Luo <ziyun.luo@icloud.com>\n"
 "Language: zh-Hans\n"
@@ -25,15 +25,15 @@ msgstr "请求次数过多"
 msgid "Server is under maintenance"
 msgstr "服务器正在维护"
 
-#: desert/middleware.py:32
+#: desert/middleware.py:34
 msgid "Argument missing"
 msgstr "User-Agent格式不正确"
 
-#: desert/middleware.py:34
+#: desert/middleware.py:36
 msgid "API version does not support"
 msgstr "API版本不支持"
 
-#: desert/middleware.py:37
+#: desert/middleware.py:38
 msgid "Platform does not support"
 msgstr "平台不支持"
 
@@ -93,86 +93,86 @@ msgstr "角色ID不能为空"
 msgid "Character does not exist."
 msgstr "角色不存在"
 
-#: player/views.py:73
+#: player/views.py:72
 msgid "Login Successful"
 msgstr "登陆成功"
 
-#: player/views.py:75
+#: player/views.py:74
 msgid "You can not login as a superuser"
 msgstr "你不能登陆为超级用户"
 
-#: player/views.py:78
+#: player/views.py:77
 msgid "Invalid Credentials"
 msgstr "用户名或密码不正确"
 
-#: player/views.py:82 player/views.py:101 player/views.py:122
-#: player/views.py:139 player/views.py:150 player/views.py:176
-#: player/views.py:190 player/views.py:211 player/views.py:218
-#: player/views.py:231 player/views.py:243 player/views.py:264 plot/views.py:65
-#: plot/views.py:83 plot/views.py:96 plot/views.py:115 plot/views.py:143
-#: plot/views.py:191 song/views.py:103 song/views.py:116 song/views.py:133
-#: song/views.py:146 song/views.py:161 song/views.py:173 song/views.py:186
-#: song/views.py:197 song/views.py:204
+#: player/views.py:81 player/views.py:100 player/views.py:121
+#: player/views.py:138 player/views.py:149 player/views.py:175
+#: player/views.py:189 player/views.py:210 player/views.py:217
+#: player/views.py:230 player/views.py:242 player/views.py:263 plot/views.py:66
+#: plot/views.py:84 plot/views.py:97 plot/views.py:116 plot/views.py:144
+#: plot/views.py:192 song/views.py:102 song/views.py:115 song/views.py:132
+#: song/views.py:145 song/views.py:160 song/views.py:172 song/views.py:185
+#: song/views.py:196 song/views.py:203
 msgid "Invalid Request"
 msgstr "请求方法不合法"
 
-#: player/views.py:97
+#: player/views.py:96
 msgid "Registration Successful"
 msgstr "注册成功"
 
-#: player/views.py:112
+#: player/views.py:111
 msgid "Desert Captcha"
 msgstr "Desert 验证码"
 
-#: player/views.py:118
+#: player/views.py:117
 msgid "Captcha Sent"
 msgstr "验证码发送成功"
 
-#: player/views.py:135
+#: player/views.py:134
 msgid "Password Reset"
 msgstr "密码重置成功"
 
-#: player/views.py:146
+#: player/views.py:145
 msgid "Logout Successful"
 msgstr "登出成功"
 
-#: player/views.py:148 player/views.py:172 player/views.py:188
-#: player/views.py:207 player/views.py:241 player/views.py:260 plot/views.py:63
-#: plot/views.py:79 plot/views.py:94 plot/views.py:111 plot/views.py:139
-#: plot/views.py:187 song/views.py:99 song/views.py:114 song/views.py:129
-#: song/views.py:159 song/views.py:171
+#: player/views.py:147 player/views.py:171 player/views.py:187
+#: player/views.py:206 player/views.py:240 player/views.py:259 plot/views.py:64
+#: plot/views.py:80 plot/views.py:95 plot/views.py:112 plot/views.py:140
+#: plot/views.py:188 song/views.py:98 song/views.py:113 song/views.py:128
+#: song/views.py:158 song/views.py:170
 msgid "You have to login first"
 msgstr "请先登录"
 
-#: player/views.py:161
+#: player/views.py:160
 msgid "You can not add yourself as friend"
 msgstr "你不能添加自己为好友"
 
-#: player/views.py:164
+#: player/views.py:163
 msgid "You have added the friend already"
 msgstr "你已经添加过该好友"
 
-#: player/views.py:170
+#: player/views.py:169
 msgid "Friend Added"
 msgstr "好友添加成功"
 
-#: player/views.py:202
+#: player/views.py:201
 msgid "Friend Deleted"
 msgstr "好友删除成功"
 
-#: player/views.py:204
+#: player/views.py:203
 msgid "You have not added the friend yet"
 msgstr "你还未添加该好友"
 
-#: player/views.py:255
+#: player/views.py:254
 msgid "Role Selected"
 msgstr "角色已选取"
 
-#: player/views.py:257
+#: player/views.py:256
 msgid "You have not unlocked this character yet"
 msgstr "你还没有解锁该章节"
 
-#: player/views.py:268
+#: player/views.py:267
 msgid "Page Not Found"
 msgstr "页面不存在"
 
@@ -200,41 +200,41 @@ msgstr "兑换码不能为空"
 msgid "Item does not exist"
 msgstr "兑换码不存在"
 
-#: plot/views.py:130
+#: plot/views.py:131
 msgid ""
 "You have already unlocked this character, you can contact us by email to get "
 "another one"
 msgstr "你已经拥有该角色了，所以你可以找我们换取另一个兑换码"
 
-#: plot/views.py:135
+#: plot/views.py:136
 msgid "Character unlocked"
 msgstr "角色已解锁"
 
-#: plot/views.py:137
+#: plot/views.py:138
 msgid "Invalid item"
 msgstr "兑换码不正确"
 
-#: plot/views.py:155
+#: plot/views.py:156
 msgid "You have already read this plot"
 msgstr "你已经阅读过该剧情了"
 
-#: plot/views.py:166
+#: plot/views.py:167
 msgid "You have already unlocked this song"
 msgstr "你已经解锁过该歌曲了"
 
-#: plot/views.py:170 plot/views.py:178
+#: plot/views.py:171 plot/views.py:179
 msgid "Read plot successfully"
 msgstr "解锁剧情成功"
 
-#: plot/views.py:174
+#: plot/views.py:175
 msgid "You have already unlocked this chapter"
 msgstr "你已经解锁过这个章节了"
 
-#: plot/views.py:181
+#: plot/views.py:182
 msgid "This Plot does not belong to any song or chapter"
 msgstr "剧情未绑定任何歌曲或章节"
 
-#: plot/views.py:185
+#: plot/views.py:186
 msgid "Please read the previous plot first"
 msgstr "请先解锁前一个剧情"
 
@@ -266,10 +266,10 @@ msgstr "魔法字段错误"
 msgid "Song ID is not exist."
 msgstr "曲目不存在"
 
-#: song/views.py:97
+#: song/views.py:96
 msgid "Score uploaded successfully"
 msgstr "分数上传成功"
 
-#: song/views.py:157
+#: song/views.py:156
 msgid "No score"
 msgstr "还没有已上传的分数"

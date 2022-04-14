@@ -1,8 +1,6 @@
-# -*- coding: utf-8 -*-
 import random
 import string
 
-import requests
 from django.contrib.auth import get_user_model, authenticate, login, logout
 from django.core.cache import cache
 from django.core.mail import send_mail
@@ -10,6 +8,7 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.translation import gettext as _
 
+from desert import constant
 from player.forms import LoginForm, RegisterForm, AddFriendForm, GetPlayerForm, EmailForm, ResetPasswordForm, \
     CharacterForm
 from player.models import Friend
@@ -58,7 +57,7 @@ def character_dump(character, character_name):
 
 @csrf_exempt
 def login_view(request):
-    if request.method == 'POST':
+    if request.method == constant.POST_METHOD:
         form = LoginForm(request.POST)
         if form.is_valid():
             user_name = form.cleaned_data.get('user_name')
@@ -84,14 +83,14 @@ def login_view(request):
 
 @csrf_exempt
 def register_view(request):
-    if request.method == 'POST':
+    if request.method == constant.POST_METHOD:
         form = RegisterForm(request.POST)
         if form.is_valid():
             user_name = form.cleaned_data.get('user_name')
             password = form.cleaned_data.get('password')
             email = form.cleaned_data.get('email')
             birth = form.cleaned_data.get('birth')
-            user = User.objects.create_user(user_name, password, email, birth)
+            user = User.create_user(user_name, password, email, birth)
             user.save()
 
             return JsonResponse({'status': 'success', 'message': _('Registration Successful')})
@@ -102,7 +101,7 @@ def register_view(request):
 
 
 def send_captcha_view(request):
-    if request.method == 'GET':
+    if request.method == constant.GET_METHOD:
         form = EmailForm(request.GET)
         if form.is_valid():
             email = form.cleaned_data.get('email')
@@ -124,7 +123,7 @@ def send_captcha_view(request):
 
 @csrf_exempt
 def reset_password_view(request):
-    if request.method == 'POST':
+    if request.method == constant.POST_METHOD:
         form = ResetPasswordForm(request.POST)
         if form.is_valid():
             email = form.cleaned_data.get('email')
@@ -140,7 +139,7 @@ def reset_password_view(request):
 
 
 def logout_view(request):
-    if request.method == 'GET':
+    if request.method == constant.GET_METHOD:
         if request.user.is_authenticated:
             logout(request)
             return JsonResponse({'status': 'success', 'message': _('Logout Successful')})
@@ -151,7 +150,7 @@ def logout_view(request):
 
 
 def add_friend_view(request):
-    if request.method == 'GET':
+    if request.method == constant.GET_METHOD:
         form = AddFriendForm(request.GET)
         if form.is_valid():
             if request.user.is_authenticated:
@@ -177,7 +176,7 @@ def add_friend_view(request):
 
 
 def get_friends_view(request):
-    if request.method == 'GET':
+    if request.method == constant.GET_METHOD:
         if request.user.is_authenticated:
             user_id = request.session.get('user_id')
             friends = Friend.objects.filter(user_id=user_id)
@@ -191,7 +190,7 @@ def get_friends_view(request):
 
 
 def delete_friend_view(request):
-    if request.method == 'GET':
+    if request.method == constant.GET_METHOD:
         form = AddFriendForm(request.GET)
         if form.is_valid():
             if request.user.is_authenticated:
@@ -212,14 +211,14 @@ def delete_friend_view(request):
 
 
 def get_all_players_view(request):
-    if request.method == 'GET':
+    if request.method == constant.GET_METHOD:
         return JsonResponse({'status': 'success', 'players': users_dump(User.objects.all())})
     else:
         return JsonResponse({'status': 'error', 'message': _('Invalid Request')}, status=405)
 
 
 def get_player_view(request):
-    if request.method == 'GET':
+    if request.method == constant.GET_METHOD:
         form = GetPlayerForm(request.GET)
         if form.is_valid():
             user_id = form.clean_user_id()
@@ -232,7 +231,7 @@ def get_player_view(request):
 
 
 def get_all_unlocked_character_view(request):
-    if request.method == 'GET':
+    if request.method == constant.GET_METHOD:
         if request.user.is_authenticated:
             user_id = request.session.get('user_id')
             unlocked_characters = CharacterUnlock.objects.filter(user_id=user_id)
@@ -245,7 +244,7 @@ def get_all_unlocked_character_view(request):
 
 @csrf_exempt
 def select_role_view(request):
-    if request.method == 'POST':
+    if request.method == constant.POST_METHOD:
         form = CharacterForm(request.POST)
         if form.is_valid():
             if request.user.is_authenticated:

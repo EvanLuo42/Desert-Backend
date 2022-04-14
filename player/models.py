@@ -19,6 +19,7 @@ class PlayerManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
+    @staticmethod
     def create_user(self, user_name, password, email, birth, **kwargs):
         kwargs['is_superuser'] = False
         kwargs['is_staff'] = False

@@ -1,11 +1,10 @@
-# -*- coding: utf-8 -*-
 from django.contrib.auth import get_user_model
 from django.http import JsonResponse
 from django.shortcuts import redirect
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.translation import gettext as _
 
-from desert import settings
+from desert import settings, constant
 from song import models
 from song.forms import UploadScoreForm, GetSongInfoForm
 from song.models import Announcement
@@ -73,7 +72,7 @@ def announcement_dump(announcement):
 
 @csrf_exempt
 def upload_score_view(request):
-    if request.method == 'POST':
+    if request.method == constant.POST_METHOD:
         form = UploadScoreForm(request.POST)
         if form.is_valid():
             if request.user.is_authenticated:
@@ -104,7 +103,7 @@ def upload_score_view(request):
 
 
 def get_all_songs_info_view(request):
-    if request.method == 'GET':
+    if request.method == constant.GET_METHOD:
         if request.user.is_authenticated:
             songs = SongInfo.objects.all()
             user_id = request.session.get('user_id')
@@ -117,7 +116,7 @@ def get_all_songs_info_view(request):
 
 
 def get_song_info_view(request):
-    if request.method == 'GET':
+    if request.method == constant.GET_METHOD:
         form = GetSongInfoForm(request.GET)
         if form.is_valid():
             if request.user.is_authenticated:
@@ -134,7 +133,7 @@ def get_song_info_view(request):
 
 
 def download_song_file_view(request):
-    if request.method == 'GET':
+    if request.method == constant.GET_METHOD:
         form = GetSongInfoForm(request.GET)
         if form.is_valid():
             song_id = form.clean_song_id()
@@ -147,7 +146,7 @@ def download_song_file_view(request):
 
 
 def get_latest_score_view(request):
-    if request.method == 'GET':
+    if request.method == constant.GET_METHOD:
         if request.user.is_authenticated:
             user_id = request.session.get('user_id')
             if SongRecord.objects.filter(user_id=user_id).exists():
@@ -162,7 +161,7 @@ def get_latest_score_view(request):
 
 
 def get_all_scores(request):
-    if request.method == 'GET':
+    if request.method == constant.GET_METHOD:
         if request.user.is_authenticated:
             user_id = request.session.get('user_id')
             scores = SongRecord.objects.filter(user_id=user_id)
@@ -174,7 +173,7 @@ def get_all_scores(request):
 
 
 def get_top_scores_by_song_id_view(request):
-    if request.method == 'GET':
+    if request.method == constant.GET_METHOD:
         form = GetSongInfoForm(request.GET)
         if form.is_valid():
             song_id = form.clean_song_id()
@@ -187,7 +186,7 @@ def get_top_scores_by_song_id_view(request):
 
 
 def announcement_view(request):
-    if request.method == 'GET':
+    if request.method == constant.GET_METHOD:
         if Announcement.objects.exists():
             announcement = Announcement.objects.order_by('-created_at').first()
             return JsonResponse({'status': 'success', 'announcement': announcement_dump(announcement)})
@@ -198,7 +197,7 @@ def announcement_view(request):
 
 
 def get_api_version_view(request):
-    if request.method == 'GET':
+    if request.method == constant.GET_METHOD:
         return JsonResponse({'status': 'success', 'version': settings.API_VERSION})
     else:
         return JsonResponse({'status': 'error', 'message': _('Invalid Request')}, status=405)
