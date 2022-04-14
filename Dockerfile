@@ -20,6 +20,6 @@ RUN sed -i s@/ports.ubuntu.com/@/mirrors.tuna.tsinghua.edu.cn/@g /etc/apt/source
     && python3 manage.py compilemessages \
     && python3 manage.py collectstatic \
     && rm -rf /usr/bin/python3 \
-    && ln -s /usr/bin/python3.9 /usr/bin/python3 \
+    && ln -s /usr/bin/python3.9 /usr/bin/python3
 EXPOSE 8000
 CMD ["gunicorn", "desert.wsgi", "-w", "4", "-k", "gevent", "-b", "0.0.0.0:8000"]
