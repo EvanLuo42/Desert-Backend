@@ -21,14 +21,17 @@ class RateLimitMiddleware(MiddlewareMixin):
 
 class ServerSafeGuardMiddleware(MiddlewareMixin):
     def process_request(self, request):
-        if settings.SAFEGUARD_MODE:
-            return JsonResponse({'status': 'error', 'message': _('Server is under maintenance')}, status=503)
+        if [request.path.find(path) != -1 for path in constant.SAFEGUARD_IGNORE]:
+            pass
+        else:
+            if settings.SAFEGUARD_MODE:
+                return JsonResponse({'status': 'error', 'message': _('Server is under maintenance')}, status=503)
 
 
 class UserAgentMiddleware(MiddlewareMixin):
     def process_request(self, request):
         user_agent = request.headers.get('User-Agent').split(' ')
-        if [request.path.find(path) for path in constant.USER_AGENT_IGNORE]:
+        if [request.path.find(path) != -1 for path in constant.USER_AGENT_IGNORE]:
             pass
         elif len(user_agent) != 2 or len(user_agent[1].split('/')) != 2:
             return JsonResponse({'status': 'error', 'message': _('Argument missing')}, status=400)

@@ -146,7 +146,7 @@ API_VERSION = 'v1.0.1-M1'
 
 # Rate limit
 REQUEST_LIMIT_TIME = 600
-REQUEST_LIMIT = 200
+REQUEST_LIMIT = 300
 
 # Need to be True when operate in Admin Site
-SAFEGUARD_MODE = False
+SAFEGUARD_MODE = True

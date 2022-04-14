@@ -11,6 +11,10 @@ SUPPORT_DEVICE = [
     'Android',
 ]
 
+SAFEGUARD_IGNORE = [
+    '/desert/admin/',
+]
+
 SONG_STORAGE_PATH = 'song/'
 IMAGE_STORAGE_PATH = 'image/'
 SONG_EXTENSION = 'dt'
