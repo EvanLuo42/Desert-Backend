@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-04-14 01:15+0000\n"
+"POT-Creation-Date: 2022-04-14 01:46+0000\n"
 "PO-Revision-Date: 2022-04-06 09:34+0800\n"
 "Last-Translator: Evan Luo <ziyun.luo@icloud.com>\n"
 "Language: zh-Hans\n"
@@ -37,61 +37,111 @@ msgstr "API版本不支持"
 msgid "Platform does not support"
 msgstr "平台不支持"
 
-#: player/forms.py:18 player/forms.py:38
+#: player/forms.py:17 player/forms.py:37
 msgid "Username can not be empty."
 msgstr "用户名不能为空"
 
-#: player/forms.py:19 player/forms.py:39
+#: player/forms.py:18 player/forms.py:38
 msgid "Username is too short."
 msgstr "用户名过短"
 
-#: player/forms.py:20 player/forms.py:40
+#: player/forms.py:19 player/forms.py:39
 msgid "Username is too long."
 msgstr "用户名过长"
 
-#: player/forms.py:27 player/forms.py:47 player/forms.py:143
+#: player/forms.py:26 player/forms.py:46 player/forms.py:142
 msgid "Password can not be empty."
 msgstr "密码不能为空"
 
-#: player/forms.py:54 player/forms.py:127 player/forms.py:150
+#: player/forms.py:53 player/forms.py:126 player/forms.py:149
 msgid "Email can not be empty."
 msgstr "邮箱不能为空"
 
-#: player/forms.py:61
+#: player/forms.py:60
 msgid "Birth can not be empty."
 msgstr "生日不能为空"
 
-#: player/forms.py:68 player/forms.py:136
+#: player/forms.py:67 player/forms.py:135
 msgid "Captcha can not be empty."
 msgstr "验证码不能为空"
 
-#: player/forms.py:75 player/forms.py:83
+#: player/forms.py:74 player/forms.py:82
 msgid "User is already exist."
 msgstr "用户已存在"
 
-#: player/forms.py:88 player/forms.py:161
+#: player/forms.py:87 player/forms.py:160
 msgid "Captcha is not correct."
 msgstr "验证码错误"
 
-#: player/forms.py:95
+#: player/forms.py:94
 msgid "Friend ID can not be empty."
 msgstr "好友ID不能为空"
 
-#: player/forms.py:104 player/forms.py:120 player/forms.py:163
+#: player/forms.py:103 player/forms.py:119 player/forms.py:162
 msgid "User does not exist."
 msgstr "用户不存在"
 
-#: player/forms.py:111
+#: player/forms.py:110
 msgid "User ID can not be empty."
 msgstr "用户ID不能为空"
 
-#: player/forms.py:170
+#: player/forms.py:169
 msgid "Character ID can not be empty."
 msgstr "角色ID不能为空"
 
-#: player/forms.py:178
+#: player/forms.py:177
 msgid "Character does not exist."
 msgstr "角色不存在"
+
+#: player/models.py:36 player/models.py:59 plot/models.py:28 plot/models.py:37
+#: plot/models.py:54 song/models.py:10 song/models.py:40
+msgid "User ID"
+msgstr "用户ID"
+
+#: player/models.py:37
+msgid "Username"
+msgstr "用户名"
+
+#: player/models.py:38
+msgid "Is a stuff"
+msgstr "是否为内部人员"
+
+#: player/models.py:39
+msgid "Is a superuser"
+msgstr "是否为超级用户"
+
+#: player/models.py:40
+msgid "Rank point"
+msgstr "Rank点"
+
+#: player/models.py:41
+msgid "Grade"
+msgstr "段位"
+
+#: player/models.py:42
+msgid "Email"
+msgstr "邮箱"
+
+#: player/models.py:43
+msgid "Birth"
+msgstr "生日"
+
+#: player/models.py:53
+msgid "Player"
+msgstr "玩家"
+
+#: player/models.py:57 plot/models.py:26 plot/models.py:35 plot/models.py:52
+#: song/models.py:8 song/models.py:38
+msgid "ID"
+msgstr "ID"
+
+#: player/models.py:58
+msgid "Friend ID"
+msgstr "好友ID"
+
+#: player/models.py:62
+msgid "Friend"
+msgstr "好友"
 
 #: player/views.py:72
 msgid "Login Successful"
@@ -200,6 +250,70 @@ msgstr "兑换码不能为空"
 msgid "Item does not exist"
 msgstr "兑换码不存在"
 
+#: plot/models.py:8 plot/models.py:27 song/models.py:27
+msgid "Chapter ID"
+msgstr "章节ID"
+
+#: plot/models.py:9
+msgid "Chapter name"
+msgstr "章节名称"
+
+#: plot/models.py:10 plot/models.py:17 plot/models.py:36 song/models.py:28
+msgid "Plot ID"
+msgstr "剧情ID"
+
+#: plot/models.py:13
+msgid "Chapter"
+msgstr "章节"
+
+#: plot/models.py:18
+msgid "Plot content"
+msgstr "剧情内容"
+
+#: plot/models.py:19
+msgid "Plot title"
+msgstr "剧情标题"
+
+#: plot/models.py:22
+msgid "Plot"
+msgstr "剧情"
+
+#: plot/models.py:31
+msgid "Chapter Unlock"
+msgstr "已解锁章节"
+
+#: plot/models.py:40
+msgid "Plot Read"
+msgstr "已阅读剧情"
+
+#: plot/models.py:44 plot/models.py:53
+msgid "Character ID"
+msgstr "角色ID"
+
+#: plot/models.py:45
+msgid "Character name"
+msgstr "角色名称"
+
+#: plot/models.py:48
+msgid "Character"
+msgstr "角色"
+
+#: plot/models.py:57
+msgid "Character Unlock"
+msgstr "已解锁角色"
+
+#: plot/models.py:61
+msgid "Item ID"
+msgstr "兑换码"
+
+#: plot/models.py:62
+msgid "Item name (type + id)"
+msgstr "物品名称 (种类 + id)"
+
+#: plot/models.py:65
+msgid "Item"
+msgstr "物品兑换"
+
 #: plot/views.py:131
 msgid ""
 "You have already unlocked this character, you can contact us by email to get "
@@ -265,6 +379,82 @@ msgstr "魔法字段错误"
 #: song/forms.py:64 song/forms.py:79
 msgid "Song ID is not exist."
 msgstr "曲目不存在"
+
+#: song/models.py:9 song/models.py:20 song/models.py:39
+msgid "Song ID"
+msgstr "曲目ID"
+
+#: song/models.py:11
+msgid "Score"
+msgstr "分数"
+
+#: song/models.py:12
+msgid "Best Score"
+msgstr "最好成绩"
+
+#: song/models.py:13 song/models.py:49
+msgid "Created at"
+msgstr "创建日期"
+
+#: song/models.py:16
+msgid "Song Record"
+msgstr "分数记录"
+
+#: song/models.py:21
+msgid "Song name"
+msgstr "曲目名称"
+
+#: song/models.py:22
+msgid "Song author"
+msgstr "曲目作者"
+
+#: song/models.py:23
+msgid "Score author"
+msgstr "谱面作者"
+
+#: song/models.py:24
+msgid "Background image author"
+msgstr "曲绘作者"
+
+#: song/models.py:25
+msgid "Difficulty"
+msgstr "难度"
+
+#: song/models.py:26
+msgid "Level"
+msgstr "分级"
+
+#: song/models.py:29
+msgid "Song file"
+msgstr "曲目文件"
+
+#: song/models.py:30
+msgid "Image file"
+msgstr "曲绘文件"
+
+#: song/models.py:31
+msgid "File MD5"
+msgstr "文件MD5"
+
+#: song/models.py:34
+msgid "Song Info"
+msgstr "曲目信息"
+
+#: song/models.py:43
+msgid "Song Unlock"
+msgstr "已解锁歌曲"
+
+#: song/models.py:47
+msgid "Announcement ID"
+msgstr "公告ID"
+
+#: song/models.py:48
+msgid "Content"
+msgstr "内容"
+
+#: song/models.py:52
+msgid "Announcement"
+msgstr "公告"
 
 #: song/views.py:96
 msgid "Score uploaded successfully"

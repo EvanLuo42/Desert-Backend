@@ -1,6 +1,7 @@
 from django.contrib.auth.base_user import BaseUserManager, AbstractBaseUser
 from django.contrib.auth.models import PermissionsMixin
 from django.db import models
+from django.utils.translation import gettext as _
 
 
 class PlayerManager(BaseUserManager):
@@ -32,14 +33,14 @@ class PlayerManager(BaseUserManager):
 
 
 class Player(AbstractBaseUser, PermissionsMixin):
-    user_id = models.BigAutoField(primary_key=True)
-    user_name = models.CharField(max_length=30, unique=True)
-    is_staff = models.BooleanField(default=False)
-    is_superuser = models.BooleanField(default=False)
-    rank_point = models.FloatField(default=0)
-    grade = models.IntegerField(default=1)
-    email = models.EmailField(unique=True)
-    birth = models.DateField()
+    user_id = models.BigAutoField(primary_key=True, verbose_name=_('User ID'))
+    user_name = models.CharField(max_length=30, unique=True, verbose_name=_('Username'))
+    is_staff = models.BooleanField(default=False, verbose_name=_('Is a stuff'))
+    is_superuser = models.BooleanField(default=False, verbose_name=_('Is a superuser'), )
+    rank_point = models.FloatField(default=0, verbose_name=_('Rank point'))
+    grade = models.IntegerField(default=1, verbose_name=_('Grade'))
+    email = models.EmailField(unique=True, verbose_name=_('Email'))
+    birth = models.DateField(verbose_name=_('Birth'))
 
     selected_role = models.IntegerField(default=1)
 
@@ -48,8 +49,16 @@ class Player(AbstractBaseUser, PermissionsMixin):
 
     objects = PlayerManager()
 
+    class Meta:
+        verbose_name = _('Player')
+        verbose_name_plural = verbose_name
+
 
 class Friend(models.Model):
-    id = models.BigAutoField(primary_key=True)
-    friend_id = models.IntegerField()
-    user_id = models.IntegerField()
+    id = models.BigAutoField(primary_key=True, verbose_name=_('ID'))
+    friend_id = models.IntegerField(verbose_name=_('Friend ID'))
+    user_id = models.IntegerField(verbose_name=_('User ID'))
+
+    class Meta:
+        verbose_name = _('Friend')
+        verbose_name_plural = verbose_name
