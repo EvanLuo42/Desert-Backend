@@ -28,7 +28,7 @@ class SongStorage(Storage):
         return str(file_url)
 
     def generate_filename(self, filename):
-        return generate_filename(filename, constant.SONG_EXTENTION)
+        return generate_filename(filename, constant.SONG_EXTENSION)
 
 
 @deconstructible
@@ -46,4 +46,4 @@ class ImageStorage(Storage):
         return str(file_url)
 
     def generate_filename(self, filename):
-        return generate_filename(filename, constant.IMAGE_EXTENTION)
+        return generate_filename(filename, constant.IMAGE_EXTENSION)
