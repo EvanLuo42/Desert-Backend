@@ -6,9 +6,7 @@ RUN sed -i s@/ports.ubuntu.com/@/mirrors.tuna.tsinghua.edu.cn/@g /etc/apt/source
     && apt-get clean \
     && apt-get update -y \
     && apt-get install software-properties-common -y \
-    && add-apt-repository ppa:deadsnakes/ppa \
     && apt-get install redis-server -y \
-    && apt-get install python3.9 -y\
     && apt-get install python3-pip -y \
     && apt-get install -y gettext \
     && pip3 install --upgrade setuptools \
@@ -18,8 +16,6 @@ RUN sed -i s@/ports.ubuntu.com/@/mirrors.tuna.tsinghua.edu.cn/@g /etc/apt/source
     && python3 manage.py makemigrations song \
     && python3 manage.py migrate \
     && python3 manage.py compilemessages \
-    && python3 manage.py collectstatic \
-    && rm -rf /usr/bin/python3 \
-    && ln -s /usr/bin/python3.9 /usr/bin/python3
+    && python3 manage.py collectstatic
 EXPOSE 8000
 CMD ["gunicorn", "desert.wsgi", "-w", "4", "-k", "gevent", "-b", "0.0.0.0:8000"]
