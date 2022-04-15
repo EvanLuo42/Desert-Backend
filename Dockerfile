@@ -2,8 +2,8 @@ FROM ubuntu:20.04
 ENV LANG C.UTF-8
 WORKDIR /usr/app/
 COPY . /usr/app/
-RUN sed -i s@/ports.ubuntu.com/@/mirrors.tuna.tsinghua.edu.cn/@g /etc/apt/sources.list \
-    && apt-get clean \
+# RUN sed -i s@/ports.ubuntu.com/@/mirrors.tuna.tsinghua.edu.cn/@g /etc/apt/sources.list \
+RUN apt-get clean \
     && apt-get update -y \
     && apt-get install software-properties-common -y \
     && apt-get install python3-pip -y \
