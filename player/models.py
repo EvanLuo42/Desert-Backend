@@ -2,7 +2,6 @@ from django.contrib.auth.base_user import BaseUserManager, AbstractBaseUser
 from django.contrib.auth.models import PermissionsMixin
 from django.db import models
 from django.utils.translation import gettext as _
-from django_otp.models import Device, DeviceManager
 from django_otp.plugins.otp_totp.models import TOTPDevice
 
 
@@ -29,7 +28,11 @@ class PlayerManager(BaseUserManager):
         return self._create_user(user_name, password, email, birth, **kwargs)
 
     def create_superuser(self, user_name, password, email, birth, **kwargs):
-        return self._create_user(user_name, password, email, birth, **kwargs)
+        user = self._create_user(user_name, password, email, birth, **kwargs)
+        device = TOTPDevice.objects.create(user=user, name=user_name, confirmed=True)
+        device.save()
+        print(device.config_url)
+        return user
 
 
 class Player(AbstractBaseUser, PermissionsMixin):
