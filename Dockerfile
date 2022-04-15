@@ -3,7 +3,8 @@ ENV LANG C.UTF-8
 WORKDIR /usr/app/
 COPY . /usr/app/
 # RUN sed -i s@/ports.ubuntu.com/@/mirrors.tuna.tsinghua.edu.cn/@g /etc/apt/sources.list \
-RUN cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+RUN apk add --no-cache tzdata
+ENV TZ Asia/Shanghai
 RUN apt-get clean \
     && apt-get update -y \
     && apt-get install software-properties-common -y \
