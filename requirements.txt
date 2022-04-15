@@ -5,4 +5,5 @@ django_otp
 qrcode
 django-redis
 django-postgresql
+psycopg2
 gunicorn[gevent]
