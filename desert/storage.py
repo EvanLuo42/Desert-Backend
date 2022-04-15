@@ -30,6 +30,10 @@ class SongStorage(Storage):
     def generate_filename(self, filename):
         return generate_filename(filename, constant.SONG_EXTENSION)
 
+    def delete(self, name):
+        client.delete_object(bucket, constant.SONG_STORAGE_PATH + name)
+        return name
+
 
 @deconstructible
 class ImageStorage(Storage):
@@ -47,3 +51,7 @@ class ImageStorage(Storage):
 
     def generate_filename(self, filename):
         return generate_filename(filename, constant.IMAGE_EXTENSION)
+
+    def delete(self, name):
+        client.delete_object(bucket, constant.IMAGE_STORAGE_PATH + name)
+        return name
