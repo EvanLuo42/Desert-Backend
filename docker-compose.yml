@@ -10,3 +10,14 @@ services:
     container_name: 'redis'
     ports:
      - "6379:6379"
+  db:
+    image: "postgres:14.2"
+    container_name: 'postgres'
+    volumes:
+      - '/usr/app/postgres:/var/lib/postgres'
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: 'desert'
+      POSTGRES_PASSWORD: 'Desert_internal_stuff_22'
+      POSTGRES_DB: 'desert'

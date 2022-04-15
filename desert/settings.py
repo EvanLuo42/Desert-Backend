@@ -63,8 +63,12 @@ WSGI_APPLICATION = 'desert.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'desert.sqlite',
+        'ENGINE': 'django.db.backends.postgresql',
+        'HOST': 'db',
+        'PORT': '5432',
+        'NAME': 'desert',
+        'USER': 'desert',
+        'PASSWORD': 'Desert_internal_stuff_22',
     }
 }
 
