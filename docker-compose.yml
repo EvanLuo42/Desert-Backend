@@ -5,6 +5,10 @@ services:
     container_name: 'desert-backend-web'
     ports:
      - "8000:8000"
+    security_opt:
+      - label=type:container_runtime_t
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
     depends_on:
       - 'redis'
       - 'db'
@@ -22,6 +26,8 @@ services:
     container_name: 'redis'
     ports:
      - "6379:6379"
+    security_opt:
+      - label=type:container_runtime_t
   db:
     image: "mariadb:10.8-rc"
     container_name: 'mariadb'
@@ -34,3 +40,5 @@ services:
       MYSQL_DATABASE: "desert"
       MYSQL_USER: "desert"
       MYSQL_PASSWORD: "Desert_internal_stuff_22"
+    security_opt:
+      - label=type:container_runtime_t
