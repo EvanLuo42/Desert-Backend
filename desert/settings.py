@@ -63,9 +63,9 @@ WSGI_APPLICATION = 'desert.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': 'django.db.backends.mysql',
         'HOST': 'db',
-        'PORT': '5432',
+        'PORT': '3306',
         'NAME': 'desert',
         'USER': 'desert',
         'PASSWORD': 'Desert_internal_stuff_22',

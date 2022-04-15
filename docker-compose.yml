@@ -11,13 +11,14 @@ services:
     ports:
      - "6379:6379"
   db:
-    image: "postgres:14.2"
-    container_name: 'postgres'
+    image: "mariadb:14.2"
+    container_name: 'mariadb'
     volumes:
-      - '/usr/app/postgres:/var/lib/postgres'
+      - '/usr/mariadb:/usr/db/mariadb'
     ports:
       - "5432:5432"
     environment:
-      POSTGRES_USER: 'desert'
-      POSTGRES_PASSWORD: 'Desert_internal_stuff_22'
-      POSTGRES_DB: 'desert'
+      MYSQL_ROOT_PASSWORD: "123456"
+      MYSQL_DATABASE: "desert"
+      MYSQL_USER: "desert"
+      MYSQL_PASSWORD: "Desert_internal_stuff_22"
