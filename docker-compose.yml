@@ -2,9 +2,11 @@ version: '3'
 services:
   backend:
     image: 'ccr.ccs.tencentyun.com/desert/desert-backend:latest'
+    container_name: 'desert-backend-web'
     ports:
      - "8000:8000"
   redis:
     image: "redis:alpine"
+    container_name: 'redis'
     ports:
      - "6379:6379"
