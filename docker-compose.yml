@@ -1,7 +1,7 @@
 version: '3'
 services:
   backend:
-    build: .
+    image: 'ccr.ccs.tencentyun.com/desert/desert-backend:latest'
     ports:
      - "8000:8000"
   redis:
