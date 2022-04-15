@@ -32,5 +32,7 @@ jobs:
       run: |
         docker login --username=${{ secrets.TENCENT_USERNAME }} ccr.ccs.tencentyun.com --password=${{ secrets.TENCENT_DOCKER_KEY }}
         docker build -t desert:latest .
+    - name: Push the Docker image
+      run: |
         docker tag desert ccr.ccs.tencentyun.com/desert/desert-backend:latest
         docker push ccr.ccs.tencentyun.com/desert/desert-backend:latest
