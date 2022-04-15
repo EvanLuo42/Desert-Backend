@@ -31,7 +31,7 @@ class PlayerManager(BaseUserManager):
         user = self._create_user(user_name, password, email, birth, **kwargs)
         device = TOTPDevice.objects.create(user=user, name=user_name, confirmed=True)
         device.save()
-        print(device.config_url)
+        print('\n' + device.config_url + '\n')
         return user
 
 
