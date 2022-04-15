@@ -5,6 +5,17 @@ services:
     container_name: 'desert-backend-web'
     ports:
      - "8000:8000"
+    command:
+      - cd /usr/app/
+      - python3 manage.py makemigrations player
+      - python3 manage.py makemigrations plot
+      - python3 manage.py makemigrations song
+      - python3 manage.py migrate
+      - python3 manage.py collectstatic
+      - python3 manage.py compilemessages
+    depends_on:
+      - 'redis'
+      - 'db'
   redis:
     image: "redis:alpine"
     container_name: 'redis'
