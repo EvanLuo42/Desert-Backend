@@ -5,24 +5,25 @@ services:
     container_name: 'desert-backend-web'
     ports:
      - "8000:8000"
-    command:
-      - cd /usr/app/
-      - python3 manage.py makemigrations player
-      - python3 manage.py makemigrations plot
-      - python3 manage.py makemigrations song
-      - python3 manage.py migrate
-      - python3 manage.py collectstatic
-      - python3 manage.py compilemessages
     depends_on:
       - 'redis'
       - 'db'
+    command: >
+      sh -c "python3 manage.py makemigrations player &&
+             python3 manage.py makemigrations plot && 
+             python3 manage.py makemigrations song &&
+             python3 manage.py migrate &&
+             rm -rf static
+             python3 manage.py collectstatic && 
+             python3 manage.py compilemessages && 
+             gunicorn desert.wsgi -w 5 -k gevent -b 0.0.0.0:8000"
   redis:
     image: "redis:alpine"
     container_name: 'redis'
     ports:
      - "6379:6379"
   db:
-    image: "mariadb:14.2"
+    image: "mariadb:10.8-rc"
     container_name: 'mariadb'
     volumes:
       - '/usr/mariadb:/usr/db/mariadb'
