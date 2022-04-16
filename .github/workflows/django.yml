@@ -30,9 +30,9 @@ jobs:
         python manage.py test
     - name: Build the Docker image
       run: |
-        docker login --username=${{ secrets.TENCENT_USERNAME }} ccr.ccs.tencentyun.com --password=${{ secrets.TENCENT_DOCKER_KEY }}
+        docker login --username=${{ secrets.TENCENT_USERNAME }} hkccr.ccs.tencentyun.com --password=${{ secrets.TENCENT_DOCKER_KEY }}
         docker build -t desert:latest .
     - name: Push the Docker image
       run: |
-        docker tag desert ccr.ccs.tencentyun.com/desert/desert-backend:latest
-        docker push ccr.ccs.tencentyun.com/desert/desert-backend:latest
+        docker tag desert hkccr.ccs.tencentyun.com/desert/desert-backend-hongkong:latest
+        docker push hkccr.ccs.tencentyun.com/desert/desert-backend-hongkong:latest
