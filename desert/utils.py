@@ -65,4 +65,4 @@ class SHA256:
 
 
 def generate_filename(filename, extension):
-    return md5((filename + str(datetime.datetime.today()))).hexdigest() + "." + extension
+    return md5((filename + str(datetime.datetime.today())).encode('utf-8')).hexdigest() + extension

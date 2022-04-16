@@ -1,7 +1,7 @@
 version: '3'
 services:
   backend:
-    image: 'ccr.ccs.tencentyun.com/desert/desert-backend:latest'
+    image: 'hkccr.ccs.tencentyun.com/desert/desert-backend-hongkong:latest'
     container_name: 'desert-backend-web'
     ports:
      - "8000:8000"
