@@ -24,7 +24,12 @@ class SongStorage(Storage):
         return name
 
     def url(self, name):
-        file_url = client.get_object_url(bucket, constant.SONG_STORAGE_PATH + name)
+        file_url = client.get_presigned_url(
+            Method=constant.GET_METHOD,
+            Bucket=bucket,
+            Key=constant.SONG_STORAGE_PATH + name,
+            Expired=120
+        )
         return str(file_url)
 
     def generate_filename(self, filename):
@@ -46,7 +51,12 @@ class ImageStorage(Storage):
         return name
 
     def url(self, name):
-        file_url = client.get_object_url(bucket, constant.IMAGE_STORAGE_PATH + name)
+        file_url = client.get_presigned_url(
+            Method=constant.GET_METHOD,
+            Bucket=bucket,
+            Key=constant.IMAGE_STORAGE_PATH + name,
+            Expired=120
+        )
         return str(file_url)
 
     def generate_filename(self, filename):
