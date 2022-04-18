@@ -90,7 +90,7 @@ def register_view(request):
             password = form.cleaned_data.get('password')
             email = form.cleaned_data.get('email')
             birth = form.cleaned_data.get('birth')
-            user = User.create_user(user_name, password, email, birth)
+            user = User.objects.create_user(user_name, password, email, birth)
             user.save()
 
             return JsonResponse({'status': 'success', 'message': _('Registration Successful')})
