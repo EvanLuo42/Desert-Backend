@@ -11,7 +11,7 @@ from link.form import ValidTokenForm
 def get_link_token_view(request):
     if request.method == constant.GET_METHOD:
         if request.user.is_authenticated:
-            cache.set(request.session.get('user_id'), uuid.uuid4(), 60 * 60 * 12)
+            cache.set(request.session.get('user_id'), str(uuid.uuid4()), 60 * 60 * 12)
             return JsonResponse({'status': 'success', 'token': cache.get(request.session.get('user_id'))})
         else:
             return JsonResponse({'status': 'error', 'message': _('You have to login first')}, status=401)
