@@ -2,6 +2,7 @@ from django.contrib import admin
 from django.urls import path, re_path
 from django.views.static import serve
 
+import link.views
 import player.views
 import plot.views
 import song.views
@@ -40,6 +41,8 @@ urlpatterns = [
     path('chapter/get/', plot.views.get_chapter_info_view),
     path('plot/read/', plot.views.read_plot_view),
     path('item/get/', plot.views.get_item_by_id_view),
+    path('link/valid/', link.views.is_token_available_view),
+    path('link/get/', link.views.get_link_token_view),
     path('desert/admin/', admin.site.urls),
     re_path('static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT}),
 ]

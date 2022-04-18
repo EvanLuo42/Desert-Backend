@@ -13,6 +13,7 @@ INSTALLED_APPS = [
     'player.apps.PlayerConfig',
     'song.apps.SongConfig',
     'plot.apps.PlotConfig',
+    'link.apps.LinkConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -38,7 +39,7 @@ MIDDLEWARE = [
     'django.middleware.locale.LocaleMiddleware',
 ]
 
-CSRF_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = False
 
 ROOT_URLCONF = 'desert.urls'
 
