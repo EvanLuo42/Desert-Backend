@@ -19,8 +19,8 @@ class ValidTokenForm(Form):
     )
 
     def clean_token(self):
-        if cache.get(self.cleaned_data.get('uid')) is not None:
-            if cache.get(self.cleaned_data.get('uid')) == self.cleaned_data.get('token'):
+        if cache.get(self.data.get('uid')) is not None:
+            if cache.get(self.data.get('uid')) == self.cleaned_data.get('token'):
                 return self.cleaned_data.get('token')
             else:
                 raise fields.ValidationError(_('Token is invalid.'))
