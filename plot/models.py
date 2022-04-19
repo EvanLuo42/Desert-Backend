@@ -3,6 +3,8 @@ import uuid
 from django.db import models
 from django.utils.translation import gettext as _
 
+from desert.storage import ImageStorage
+
 
 class Chapter(models.Model):
     chapter_id = models.BigAutoField(primary_key=True, verbose_name=_('Chapter ID'))
@@ -47,6 +49,7 @@ class PlotRead(models.Model):
 class Character(models.Model):
     character_id = models.BigAutoField(primary_key=True, verbose_name=_('Character ID'))
     character_name = models.CharField(max_length=255, verbose_name=_('Character name'))
+    character_image = models.FileField(storage=ImageStorage(), verbose_name=_('Character image'))
 
     class Meta:
         verbose_name = _('Character')

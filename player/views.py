@@ -25,7 +25,7 @@ def users_dump(users):
         'user_name': user.user_name,
         'rank_point': user.rank_point,
         'grade': user.grade,
-        'selected_role': user.selected_role,
+        'selected_role': character_dump(Character.objects.filter(character_id=user.selected_role).first()),
         'last_login': str(user.last_login),
     } for user in users]
 
@@ -36,7 +36,7 @@ def user_dump(user):
         'user_name': user.user_name,
         'rank_point': user.rank_point,
         'grade': user.grade,
-        'selected_role': user.selected_role,
+        'selected_role': character_dump(Character.objects.filter(character_id=user.selected_role).first()),
         'last_login': str(user.last_login),
     }
 
@@ -45,13 +45,15 @@ def characters_dump(unlocked_characters):
     return [{
         'character_id': character.character_id,
         'character_name': Character.objects.filter(character_id=character.character_id).first().character_name,
+        'character_image': Character.objects.filter(character_id=character.character_id).first().character_image.url,
     } for character in unlocked_characters]
 
 
-def character_dump(character, character_name):
+def character_dump(character):
     return {
         'character_id': character.character_id,
-        'character_name': character_name,
+        'character_name': character.character_name,
+        'character_images': character.character_image.url,
     }
 
 
