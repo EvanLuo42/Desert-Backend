@@ -7,8 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-04-18 09:31+0800\n"
+"Report-Msgid-Bugs-To: ziyun.luo@icloud.com\n"
+"POT-Creation-Date: 2022-04-19 13:47+0800\n"
 "PO-Revision-Date: 2022-04-06 09:34+0800\n"
 "Last-Translator: Evan Luo <ziyun.luo@icloud.com>\n"
 "Language: zh-Hans\n"
@@ -25,15 +25,15 @@ msgstr "请求次数过多"
 msgid "Server is under maintenance"
 msgstr "服务器正在维护"
 
-#: desert/middleware.py:37
+#: desert/middleware.py:42
 msgid "Argument missing"
 msgstr "User-Agent格式不正确"
 
-#: desert/middleware.py:39
+#: desert/middleware.py:44
 msgid "API version does not support"
 msgstr "API版本不支持"
 
-#: desert/middleware.py:41
+#: desert/middleware.py:46
 msgid "Platform does not support"
 msgstr "平台不支持"
 
@@ -49,19 +49,19 @@ msgstr "User ID不能为空"
 msgid "Token is invalid."
 msgstr "Token无效"
 
-#: link/views.py:17 player/views.py:147 player/views.py:171 player/views.py:187
-#: player/views.py:206 player/views.py:240 player/views.py:259 plot/views.py:64
+#: link/views.py:17 player/views.py:149 player/views.py:173 player/views.py:189
+#: player/views.py:208 player/views.py:242 player/views.py:261 plot/views.py:64
 #: plot/views.py:80 plot/views.py:95 plot/views.py:112 plot/views.py:140
 #: plot/views.py:188 song/views.py:98 song/views.py:113 song/views.py:128
 #: song/views.py:158 song/views.py:170
 msgid "You have to login first"
 msgstr "请先登录"
 
-#: link/views.py:19 link/views.py:30 player/views.py:81 player/views.py:100
-#: player/views.py:121 player/views.py:138 player/views.py:149
-#: player/views.py:175 player/views.py:189 player/views.py:210
-#: player/views.py:217 player/views.py:230 player/views.py:242
-#: player/views.py:263 plot/views.py:66 plot/views.py:84 plot/views.py:97
+#: link/views.py:19 link/views.py:30 player/views.py:83 player/views.py:102
+#: player/views.py:123 player/views.py:140 player/views.py:151
+#: player/views.py:177 player/views.py:191 player/views.py:212
+#: player/views.py:219 player/views.py:232 player/views.py:244
+#: player/views.py:265 plot/views.py:66 plot/views.py:84 plot/views.py:97
 #: plot/views.py:116 plot/views.py:144 plot/views.py:192 song/views.py:102
 #: song/views.py:115 song/views.py:132 song/views.py:145 song/views.py:160
 #: song/views.py:172 song/views.py:185 song/views.py:196 song/views.py:203
@@ -124,117 +124,117 @@ msgstr "角色ID不能为空"
 msgid "Character does not exist."
 msgstr "角色不存在"
 
-#: player/models.py:39 player/models.py:63 plot/models.py:30 plot/models.py:40
-#: plot/models.py:59 song/models.py:10 song/models.py:42
+#: player/models.py:38 player/models.py:62 plot/models.py:32 plot/models.py:42
+#: plot/models.py:62 song/models.py:10 song/models.py:42
 msgid "User ID"
 msgstr "用户ID"
 
-#: player/models.py:40
+#: player/models.py:39
 msgid "Username"
 msgstr "用户名"
 
-#: player/models.py:41
+#: player/models.py:40
 msgid "Is a stuff"
 msgstr "是否为内部人员"
 
-#: player/models.py:42
+#: player/models.py:41
 msgid "Is a superuser"
 msgstr "是否为超级用户"
 
-#: player/models.py:43
+#: player/models.py:42
 msgid "Rank point"
 msgstr "Rank点"
 
-#: player/models.py:44
+#: player/models.py:43
 msgid "Grade"
 msgstr "段位"
 
-#: player/models.py:45
+#: player/models.py:44
 msgid "Email"
 msgstr "邮箱"
 
-#: player/models.py:46
+#: player/models.py:45
 msgid "Birth"
 msgstr "生日"
 
-#: player/models.py:56
+#: player/models.py:55
 msgid "Player"
 msgstr "玩家"
 
-#: player/models.py:61 plot/models.py:28 plot/models.py:38 plot/models.py:57
+#: player/models.py:60 plot/models.py:30 plot/models.py:40 plot/models.py:60
 #: song/models.py:8 song/models.py:40
 msgid "ID"
 msgstr "ID"
 
-#: player/models.py:62
+#: player/models.py:61
 msgid "Friend ID"
 msgstr "好友ID"
 
-#: player/models.py:66
+#: player/models.py:65
 msgid "Friend"
 msgstr "好友"
 
-#: player/views.py:72
+#: player/views.py:74
 msgid "Login Successful"
 msgstr "登陆成功"
 
-#: player/views.py:74
+#: player/views.py:76
 msgid "You can not login as a superuser"
 msgstr "你不能登陆为超级用户"
 
-#: player/views.py:77
+#: player/views.py:79
 msgid "Invalid Credentials"
 msgstr "用户名或密码不正确"
 
-#: player/views.py:96
+#: player/views.py:98
 msgid "Registration Successful"
 msgstr "注册成功"
 
-#: player/views.py:111
+#: player/views.py:113
 msgid "Desert Captcha"
 msgstr "Desert 验证码"
 
-#: player/views.py:117
+#: player/views.py:119
 msgid "Captcha Sent"
 msgstr "验证码发送成功"
 
-#: player/views.py:134
+#: player/views.py:136
 msgid "Password Reset"
 msgstr "密码重置成功"
 
-#: player/views.py:145
+#: player/views.py:147
 msgid "Logout Successful"
 msgstr "登出成功"
 
-#: player/views.py:160
+#: player/views.py:162
 msgid "You can not add yourself as friend"
 msgstr "你不能添加自己为好友"
 
-#: player/views.py:163
+#: player/views.py:165
 msgid "You have added the friend already"
 msgstr "你已经添加过该好友"
 
-#: player/views.py:169
+#: player/views.py:171
 msgid "Friend Added"
 msgstr "好友添加成功"
 
-#: player/views.py:201
+#: player/views.py:203
 msgid "Friend Deleted"
 msgstr "好友删除成功"
 
-#: player/views.py:203
+#: player/views.py:205
 msgid "You have not added the friend yet"
 msgstr "你还未添加该好友"
 
-#: player/views.py:254
+#: player/views.py:256
 msgid "Role Selected"
 msgstr "角色已选取"
 
-#: player/views.py:256
+#: player/views.py:258
 msgid "You have not unlocked this character yet"
 msgstr "你还没有解锁该章节"
 
-#: player/views.py:267
+#: player/views.py:269
 msgid "Page Not Found"
 msgstr "页面不存在"
 
@@ -262,67 +262,71 @@ msgstr "兑换码不能为空"
 msgid "Item does not exist"
 msgstr "兑换码不存在"
 
-#: plot/models.py:8 plot/models.py:29 song/models.py:28
+#: plot/models.py:10 plot/models.py:31 song/models.py:28
 msgid "Chapter ID"
 msgstr "章节ID"
 
-#: plot/models.py:9
+#: plot/models.py:11
 msgid "Chapter name"
 msgstr "章节名称"
 
-#: plot/models.py:10 plot/models.py:18 plot/models.py:39 song/models.py:29
+#: plot/models.py:12 plot/models.py:20 plot/models.py:41 song/models.py:29
 msgid "Plot ID"
 msgstr "剧情ID"
 
-#: plot/models.py:13
+#: plot/models.py:15
 msgid "Chapter"
 msgstr "章节"
 
-#: plot/models.py:19
+#: plot/models.py:21
 msgid "Plot content"
 msgstr "剧情内容"
 
-#: plot/models.py:20
+#: plot/models.py:22
 msgid "Plot title"
 msgstr "剧情标题"
 
-#: plot/models.py:23
+#: plot/models.py:25
 msgid "Plot"
 msgstr "剧情"
 
-#: plot/models.py:33
+#: plot/models.py:35
 msgid "Chapter Unlock"
 msgstr "已解锁章节"
 
-#: plot/models.py:43
+#: plot/models.py:45
 msgid "Plot Read"
 msgstr "已阅读剧情"
 
-#: plot/models.py:48 plot/models.py:58
+#: plot/models.py:50 plot/models.py:61
 msgid "Character ID"
 msgstr "角色ID"
 
-#: plot/models.py:49
+#: plot/models.py:51
 msgid "Character name"
 msgstr "角色名称"
 
 #: plot/models.py:52
+msgid "Character image"
+msgstr "角色图"
+
+#: plot/models.py:55
 msgid "Character"
 msgstr "角色"
 
-#: plot/models.py:62
+#: plot/models.py:65
 msgid "Character Unlock"
 msgstr "已解锁角色"
 
-#: plot/models.py:67
+#: plot/models.py:70
 msgid "Item ID"
 msgstr "兑换码"
 
-#: plot/models.py:68
+#: plot/models.py:71
 msgid "Item name (type + id)"
 msgstr "物品名称 (种类 + id)"
 
-#: plot/models.py:71
+#: plot/models.py:74
 msgid "Item"
 msgstr "物品兑换"
 
