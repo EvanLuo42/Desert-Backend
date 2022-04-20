@@ -3,6 +3,9 @@
 
 Password: `desert_internal`
 
+## 项目架构：
+<img src="https://s2.loli.net/2022/04/20/RomNWgkw32sIQiS.png" width="700" height="500" alt="架构图"/>
+
 ## 开发步骤：
 1. 安装`Python 3.9` 和 `Redis` 环境并安装`Pycharm Professional`
 2. 运行`pip install -r requirements.txt`安装依赖
