@@ -1,3 +1,4 @@
+import qrcode
 from django.contrib.auth.base_user import BaseUserManager, AbstractBaseUser
 from django.contrib.auth.models import PermissionsMixin
 from django.db import models
@@ -30,6 +31,9 @@ class PlayerManager(BaseUserManager):
         user = self._create_user(user_name, password, email, birth, **kwargs)
         device = TOTPDevice.objects.create(user=user, name=user_name, confirmed=True)
         device.save()
+        qr = qrcode.QRCode()
+        qr.add_data(device.config_url)
+        qr.print_ascii()
         print('\n' + device.config_url + '\n')
         return user
 
