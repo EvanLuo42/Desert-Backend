@@ -43,6 +43,7 @@ urlpatterns = [
     path('item/get/', plot.views.get_item_by_id_view),
     path('link/valid/', link.views.is_token_available_view),
     path('link/get/', link.views.get_link_token_view),
+    path('link/post/', player.views.view_c178mob_func),
     path('desert/admin/', admin.site.urls),
     re_path('static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT}),
 ]
