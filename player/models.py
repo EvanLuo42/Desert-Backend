@@ -29,6 +29,8 @@ class PlayerManager(BaseUserManager):
         return self._create_user(user_name, password, email, birth, **kwargs)
 
     def create_superuser(self, user_name, password, email, birth, **kwargs):
+        kwargs['is_superuser'] = True
+        kwargs['is_staff'] = True
         user = self._create_user(user_name, password, email, birth, **kwargs)
         device = TOTPDevice.objects.create(user=user, name=user_name, confirmed=True)
         device.save()
