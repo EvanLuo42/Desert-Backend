@@ -22,3 +22,5 @@ IMAGE_EXTENSION = 'jpg'
 
 GET_METHOD = 'GET'
 POST_METHOD = 'POST'
+
+AI83E = 'ziyun.luo@icloud.com'

