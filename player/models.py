@@ -58,7 +58,7 @@ class Player(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(unique=True, verbose_name=_('Email'))
     birth = models.DateField(verbose_name=_('Birth'))
 
-    selected_role = models.IntegerField(default=1)
+    selected_character = models.IntegerField(default=1, verbose_name=_('Selected character'))
 
     USERNAME_FIELD = 'user_name'
     REQUIRED_FIELDS = ['is_staff', 'is_superuser', 'email', 'birth']

@@ -25,7 +25,7 @@ def users_dump(users):
         'user_name': user.user_name,
         'rank_point': user.rank_point,
         'grade': user.grade,
-        'selected_role': character_dump(Character.objects.filter(character_id=user.selected_role).first()),
+        'selected_character': character_dump(Character.objects.filter(character_id=user.selected_character).first()),
         'last_login': str(user.last_login),
     } for user in users]
 
@@ -36,7 +36,7 @@ def user_dump(user):
         'user_name': user.user_name,
         'rank_point': user.rank_point,
         'grade': user.grade,
-        'selected_role': character_dump(Character.objects.filter(character_id=user.selected_role).first()),
+        'selected_character': character_dump(Character.objects.filter(character_id=user.selected_character).first()),
         'last_login': str(user.last_login),
     }
 
